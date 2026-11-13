@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NOUN Study Desk · 200L IT/CS Second Semester</title>
+<meta name="description" content="Free study site for NOUN 200L second-semester IT and Computer Science e-exams: CBT mock exams with past questions, flashcards, course summaries, progress tracking and exam countdown.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1a1f" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="NOUN Study Desk">
+<meta property="og:description" content="CBT practice, past questions, flashcards and summaries for NOUN 200L IT/CS second semester.">
+<meta property="og:type" content="website">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Study Desk">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#app">Skip to content</a>
+<header class="top"><div class="wrap">
+  <button class="brand" id="homeBtn" aria-label="Go to dashboard"><img class="seal" src="icons/icon.svg" alt="" width="34" height="34"><span>Study Desk<small>NOUN 200L · IT · Second semester</small></span></button>
+  <nav class="nav" id="nav" aria-label="Main">
+    <a href="#/" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span>Home</span></a>
+    <a href="#/timetable" data-nav="timetable"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Timetable</span></a>
+    <a href="#/library" data-nav="library" title="All NOUN courses: course material and past question PDFs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21a2 2 0 0 0 2 2h13"/></svg><span>Library</span></a>
+  </nav>
+  <span class="spacer"></span>
+  <span id="topChip"></span>
+  <button class="icon-btn" id="installBtn" hidden title="Install as an app">Install</button>
+  <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>
+</div></header>
+<main class="wrap" id="app" tabindex="-1"><noscript><p style="padding:24px 0">This site needs JavaScript turned on.</p></noscript></main>
+<footer class="site-foot"><div class="wrap">
+  <p><b>NOUN Study Desk</b> is an independent study aid. It is not run by or connected to the National Open University of Nigeria.</p>
+  <p>Course content follows the official <a href="https://nou.edu.ng/ecourseware-faculty-of-computing-2" target="_blank" rel="noopener">NOUN e-courseware</a> and the NUC CCMAS outline. Past questions come from student-shared papers on <a href="https://noungeeks.com/noun-gst-past-questions/" target="_blank" rel="noopener">noungeeks</a>, with keys checked against the course material. Course material and past-paper PDFs on the All courses page link to <a href="https://puredu.net/noun-e-courseware" target="_blank" rel="noopener">puredu.net</a>. Always confirm with your own course material.</p>
+  <p class="muted">Your progress is saved only in this browser. Works offline after the first visit.</p>
+</div></footer>
+<div id="modalRoot"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="js/data.js"></script>
+<script src="js/past-questions.js"></script>
+<script src="js/guides/COS201.js"></script>
+<script src="js/guides/GST201.js"></script>
+<script src="js/guides/IFT203.js"></script>
+<script src="js/guides/IFT205.js"></script>
+<script src="js/guides/IFT211.js"></script>
+<script src="js/guides/IFT213.js"></script>
+<script src="js/guides/INS207.js"></script>
+<script src="js/guides/PHY108.js"></script>
+<script src="js/guides/CYB111.js"></script>
+<script src="js/packs/COS102.js"></script>
+<script src="js/packs/IFT191.js"></script>
+<script src="js/packs/PHY107.js"></script>
+<script src="js/packs/MTH102.js"></script>
+<script src="js/packs/GST102.js"></script>
+<script src="js/official.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

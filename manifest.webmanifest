@@ -1,0 +1,14 @@
+{
+  "name": "NOUN Study Desk",
+  "short_name": "Study Desk",
+  "description": "CBT practice, past questions, flashcards and summaries for NOUN 200L IT/CS second semester.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f5f1",
+  "theme_color": "#3d3fd6",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

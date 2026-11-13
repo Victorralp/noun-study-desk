@@ -1,0 +1,958 @@
+/* NOUN 200L Second Semester (IT) — study content.
+   mcq: [moduleIndex, question, [options], correctIndex, explanation?]
+   fib: [moduleIndex, question with ____, [accepted answers], explanation?]
+   source: "noun" = outline taken from the official NOUN course material PDF,
+           "ccmas" = outline built from the NUC CCMAS curriculum topics for the course. */
+window.COURSES = [
+{
+  code: "COS201", title: "Computer Programming I", units: 3, cat: "C", source: "ccmas",
+  modules: [
+    ["Problem solving & algorithms", [
+      "Problem-solving steps: define the problem, analyse it, design an algorithm, code, test/debug, document.",
+      "An algorithm is a finite, ordered set of well-defined steps. Properties: finiteness, definiteness, input, output, effectiveness.",
+      "Flowchart symbols: oval = start/stop (terminal), parallelogram = input/output, rectangle = process, diamond = decision, arrow = flowline.",
+      "Pseudocode is English-like, language-independent description of an algorithm."
+    ]],
+    ["Languages & translators", [
+      "Low-level: machine language (binary, understood directly) and assembly (mnemonics). High-level: Python, Java, C++.",
+      "Compiler translates the whole program to object code before running. Interpreter translates and executes line by line. Assembler converts assembly to machine code.",
+      "Source code = what the programmer writes; object code = translated output.",
+      "Error types: syntax (grammar broken, caught by translator), runtime (crash while running, e.g. divide by zero), logic (runs but gives wrong answer).",
+      "Paradigms: procedural, object-oriented (classes/objects), functional, logic. IDE = Integrated Development Environment."
+    ]],
+    ["Data types, variables & operators", [
+      "Basic types: integer, float/real, string, boolean (True/False), character.",
+      "Identifier rules: start with letter or underscore, no spaces, not a keyword, case-sensitive in most languages.",
+      "Arithmetic operators: + - * / ; % modulus (remainder); // floor division; ** exponent (Python).",
+      "Relational: == != < > <= >= . Logical: AND, OR, NOT.",
+      "Precedence: brackets, exponent, * / // %, then + - . Type casting converts types, e.g. int(\"5\")."
+    ]],
+    ["Control structures", [
+      "Three basic structures: sequence, selection (if, if-else, elif, switch/case), iteration (for, while, do-while).",
+      "do-while tests its condition after the body, so it runs at least once.",
+      "break exits the loop; continue skips to the next iteration.",
+      "An infinite loop never ends because its condition never becomes false. Counters count; accumulators add up totals.",
+      "range(start, stop, step) in Python stops before 'stop'."
+    ]],
+    ["Functions, lists & strings", [
+      "A function is a named reusable block. Parameters are in the definition; arguments are the values passed in the call.",
+      "return sends a value back. Local variables exist only inside the function; global variables are visible everywhere.",
+      "Recursion: a function calls itself and needs a base case to stop.",
+      "Lists/arrays store many values; indexing starts at 0. Strings are sequences of characters, also 0-indexed.",
+      "Testing and debugging: use test data, trace tables and print statements to find errors."
+    ]]
+  ],
+  cards: [
+    ["Algorithm", "A finite, ordered set of unambiguous steps for solving a problem."],
+    ["Pseudocode", "Structured English-like description of an algorithm, independent of any language."],
+    ["Flowchart", "Diagram of an algorithm using standard symbols joined by flowlines."],
+    ["Compiler", "Translates the entire high-level program into object code before execution."],
+    ["Interpreter", "Translates and executes a program one statement at a time."],
+    ["Assembler", "Converts assembly language into machine code."],
+    ["Syntax error", "Breaking the grammar rules of a language; detected during translation."],
+    ["Logic error", "Program runs but gives incorrect results because the reasoning is wrong."],
+    ["Runtime error", "Error that occurs while the program is running, e.g. division by zero."],
+    ["Variable", "A named memory location whose value can change during execution."],
+    ["Constant", "A named value that does not change during execution."],
+    ["Modulus (%)", "Operator that returns the remainder of a division. 17 % 5 = 2."],
+    ["Iteration", "Repeating a block of statements (loops: for, while, do-while)."],
+    ["Selection", "Choosing a path based on a condition (if, if-else, switch)."],
+    ["Recursion", "A function calling itself; must have a base case."],
+    ["Type casting", "Converting a value from one data type to another."]
+  ],
+  mcq: [
+    [0, "Which flowchart symbol represents a decision?", ["Rectangle", "Diamond", "Parallelogram", "Oval"], 1],
+    [0, "The flowchart symbol used for input/output is the", ["Oval", "Diamond", "Parallelogram", "Rectangle"], 2],
+    [0, "An algorithm must end after a finite number of steps. This property is called", ["Definiteness", "Finiteness", "Effectiveness", "Generality"], 1],
+    [0, "Each step of an algorithm must be precise and unambiguous. This property is", ["Finiteness", "Definiteness", "Input", "Output"], 1],
+    [0, "An English-like description of an algorithm that is not tied to any language is", ["Pseudocode", "Machine code", "Bytecode", "A flowline"], 0],
+    [1, "A program that translates the whole source program into object code before execution is a(n)", ["Interpreter", "Compiler", "Assembler", "Linker"], 1],
+    [1, "Which translator executes a program one statement at a time?", ["Compiler", "Assembler", "Interpreter", "Loader"], 2],
+    [1, "An assembler converts", ["High-level code to machine code", "Assembly language to machine code", "Machine code to assembly", "Pseudocode to flowcharts"], 1],
+    [1, "The only language a computer understands directly is", ["Assembly language", "Python", "Machine language", "Pseudocode"], 2],
+    [1, "An error caused by breaking the grammar rules of a language is a", ["Logic error", "Runtime error", "Syntax error", "Semantic warning"], 2],
+    [1, "A program runs but gives a wrong answer. This is a", ["Syntax error", "Logic error", "Compilation error", "Linking error"], 1],
+    [1, "Dividing a number by zero while a program is running causes a", ["Syntax error", "Runtime error", "Logic error", "Lexical error"], 1],
+    [1, "Programming built around classes and objects is called", ["Logic programming", "Object-oriented programming", "Machine programming", "Assembly programming"], 1],
+    [2, "In Python, what is the value of 17 % 5?", ["3", "2", "3.4", "12"], 1, "% gives the remainder: 17 = 3×5 + 2."],
+    [2, "In Python, 17 // 5 evaluates to", ["3.4", "3", "2", "4"], 1, "// is floor division: it drops the fractional part."],
+    [2, "What is the value of 2 + 3 * 4 ** 2 in Python?", ["80", "50", "400", "98"], 1, "4**2 = 16, 3*16 = 48, 2 + 48 = 50."],
+    [2, "Which of these is a valid identifier in most languages?", ["2total", "total_sum", "total sum", "class"], 1],
+    [2, "The data type that holds only True or False is", ["Integer", "Float", "Boolean", "String"], 2],
+    [2, "Converting a value from one data type to another, e.g. int(\"5\"), is called", ["Type casting", "Recursion", "Iteration", "Overloading"], 0],
+    [3, "Which control structure repeats a block of statements?", ["Sequence", "Selection", "Iteration", "Declaration"], 2],
+    [3, "A loop that checks its condition after the body, so the body runs at least once, is a", ["for loop", "while loop", "do-while loop", "nested if"], 2],
+    [3, "Which statement immediately exits the nearest loop?", ["continue", "break", "return", "pass"], 1],
+    [3, "How many times does the loop for i in range(2, 10, 3) run?", ["3", "8", "4", "2"], 0, "i takes 2, 5, 8 — three times."],
+    [4, "Values passed to a function when it is called are called", ["Parameters", "Arguments", "Identifiers", "Operands"], 1],
+    [4, "A function that calls itself is", ["Iterative", "Recursive", "Nested", "Anonymous"], 1],
+    [4, "In most languages, the first element of an array or list has index", ["1", "0", "-1", "It depends on the size"], 1],
+    [4, "A variable declared inside a function and usable only there has ___ scope", ["Global", "Local", "Static", "Public"], 1],
+    [4, "Given s = \"NOUN\", what is s[1]?", ["N", "O", "U", "NO"], 1, "Indexing starts at 0, so s[1] is the second character."]
+  ],
+  fib: [
+    [0, "The flowchart symbol used to show the start or end of a program is the ____.", ["oval", "terminal", "terminator", "ellipse"]],
+    [0, "A finite, ordered set of well-defined steps for solving a problem is called an ____.", ["algorithm"]],
+    [1, "The program a programmer writes in a high-level language is called ____ code.", ["source"]],
+    [1, "The process of finding and removing errors from a program is called ____.", ["debugging"]],
+    [1, "IDE stands for Integrated ____ Environment.", ["development"]],
+    [2, "The operator that returns the remainder after division is the ____ operator.", ["modulus", "modulo", "mod"]],
+    [3, "A loop whose condition never becomes false is called an ____ loop.", ["infinite", "endless"]],
+    [3, "The if-else statement is an example of a ____ control structure.", ["selection", "decision", "conditional"]],
+    [4, "In recursion, the condition that stops further calls is called the ____ case.", ["base"]],
+    [4, "The keyword used in Python to define a function is ____.", ["def"]]
+  ]
+},
+{
+  code: "GST201", title: "Nigerian People and Cultures", units: 2, cat: "C", source: "ccmas",
+  modules: [
+    ["Culture & Nigeria's peoples", [
+      "E.B. Tylor (1871): culture is 'that complex whole' of knowledge, belief, art, morals, law, custom and other capabilities acquired by people as members of society.",
+      "Material culture = tangible things (tools, clothes, buildings, art). Non-material culture = language, beliefs, values, norms.",
+      "Features of culture: learned, shared, transmitted across generations, symbolic, dynamic (changes over time).",
+      "Nigeria has 250+ ethnic groups. Largest: Hausa-Fulani (North), Yoruba (South-West), Igbo (South-East). Others: Kanuri, Tiv, Ijaw, Ibibio, Edo, Nupe, Igala, Idoma, Efik.",
+      "Ethnocentrism = judging other cultures by the standards of one's own as superior. Cultural relativism = understanding a culture on its own terms."
+    ]],
+    ["Pre-colonial societies", [
+      "Nok culture (c. 500 BC – AD 200, around southern Kaduna/Plateau): terracotta figurines and early iron working.",
+      "Igbo-Ukwu bronzes (about 9th century AD); Ife bronze and terracotta heads; Benin bronzes and ivory.",
+      "Hausa states (Hausa Bakwai) ruled by Sarki; Usman dan Fodio's jihad (1804) created the Sokoto Caliphate with emirates.",
+      "Kanem-Bornu: ruled by the Mai, later the Shehu (El-Kanemi dynasty).",
+      "Old Oyo: Alaafin as king, checked by the Oyomesi (led by the Bashorun) and the Ogboni society.",
+      "Igbo: acephalous/segmentary (no central king) — council of elders, age grades, Umunna, Ofo title holders.",
+      "Benin Kingdom: ruled by the Oba with chiefs like the Uzama."
+    ]],
+    ["Colonialism & the making of Nigeria", [
+      "Lagos annexed as a British colony in 1861. Royal Niger Company administered the Niger area until 1900.",
+      "1900: Northern and Southern Protectorates. 1 January 1914: amalgamation by Frederick Lugard, who became Governor-General.",
+      "Flora Shaw (later Lugard's wife) suggested the name 'Nigeria' (1897).",
+      "Indirect rule: governing through traditional rulers. Worked best in the North, failed in the East (warrant chiefs; Aba Women's Riot 1929).",
+      "Constitutions: Clifford 1922 (elective principle), Richards 1946 (regionalism), Macpherson 1951, Lyttleton 1954 (federalism).",
+      "Nationalists: Herbert Macaulay (NNDP 1923), Nnamdi Azikiwe (NCNC 1944), Obafemi Awolowo (Action Group 1951), Ahmadu Bello (NPC)."
+    ]],
+    ["Post-independence Nigeria", [
+      "Independence: 1 October 1960. Republic: 1 October 1963.",
+      "Coups in January and July 1966. Civil War 1967–1970; Ojukwu declared Biafra on 30 May 1967.",
+      "Gowon's post-war policy: 'No victor, no vanquished' and the 3Rs — Reconciliation, Reconstruction, Rehabilitation.",
+      "NYSC established 1973 (Gowon) to promote national unity.",
+      "States: 12 (1967) → 19 (1976) → 36 (1996) plus FCT; 774 local government areas. Capital moved to Abuja on 12 December 1991.",
+      "Federal character principle: appointments reflect the country's diversity. Fourth Republic began 29 May 1999."
+    ]],
+    ["Social institutions, values & national development", [
+      "Family types: nuclear and extended. Marriage: monogamy, polygyny (one man, several wives), polyandry (rare).",
+      "Descent: patrilineal (father's line), matrilineal (mother's line), double/bilateral.",
+      "Shared Nigerian values: respect for elders, hospitality, communal living, religious tolerance.",
+      "Challenges to national integration: ethnicity, religious conflict, corruption, insecurity, poverty.",
+      "Paths to integration: education, NYSC, federal character, inter-ethnic marriage, good governance."
+    ]]
+  ],
+  cards: [
+    ["Culture (Tylor)", "That complex whole which includes knowledge, belief, art, morals, law, custom and other capabilities acquired by man as a member of society."],
+    ["Material culture", "Tangible products of a society: tools, clothing, houses, artworks."],
+    ["Non-material culture", "Intangible parts: language, beliefs, values, norms, customs."],
+    ["Ethnocentrism", "Belief that one's own culture is superior to others."],
+    ["Nok culture", "Ancient culture (c. 500 BC–AD 200) known for terracotta figurines and early iron working."],
+    ["Sokoto Caliphate", "Islamic state formed after Usman dan Fodio's jihad of 1804."],
+    ["Oyomesi", "Council of seven kingmakers in Old Oyo that checked the Alaafin's power."],
+    ["Acephalous society", "Society without a central ruler, e.g. traditional Igbo communities."],
+    ["Amalgamation", "Joining of Northern and Southern Protectorates by Lugard on 1 January 1914."],
+    ["Indirect rule", "British policy of governing through traditional rulers."],
+    ["Elective principle", "Introduced by the 1922 Clifford Constitution."],
+    ["3Rs", "Reconciliation, Reconstruction, Rehabilitation — Gowon's post-war policy."],
+    ["NYSC", "National Youth Service Corps, established 1973 to promote unity."],
+    ["Federal character", "Principle that public appointments reflect Nigeria's diversity."],
+    ["Polygyny", "A man married to more than one wife."]
+  ],
+  mcq: [
+    [0, "Who defined culture as 'that complex whole which includes knowledge, belief, art, morals, law, custom…'?", ["E.B. Tylor", "Karl Marx", "Max Weber", "Emile Durkheim"], 0],
+    [0, "Tools, clothing, buildings and artworks belong to which aspect of culture?", ["Non-material", "Material", "Symbolic", "Ideal"], 1],
+    [0, "Language, beliefs and values are examples of", ["Material culture", "Non-material culture", "Technology", "Artefacts"], 1],
+    [0, "Culture being passed from one generation to the next means culture is", ["Innate", "Transmitted", "Static", "Biological"], 1],
+    [0, "Nigeria's three largest ethnic groups are", ["Hausa-Fulani, Yoruba and Igbo", "Tiv, Ijaw and Kanuri", "Efik, Ibibio and Edo", "Nupe, Igala and Idoma"], 0],
+    [1, "The Nok culture is best known for its", ["Bronze heads", "Terracotta figurines", "Ivory masks", "Stone monoliths"], 1],
+    [1, "Bronze works dated to about the 9th century AD were found at", ["Igbo-Ukwu", "Kano", "Ilorin", "Calabar"], 0],
+    [1, "The jihad that led to the Sokoto Caliphate was launched in 1804 by", ["Usman dan Fodio", "Muhammad Bello", "El-Kanemi", "Ahmadu Bello"], 0],
+    [1, "In the Old Oyo Empire, the council that could check the Alaafin's power was the", ["Uzama", "Oyomesi", "Ndichie", "Emirate council"], 1],
+    [1, "Pre-colonial Igbo political organisation is usually described as", ["Centralised monarchy", "Acephalous", "Theocratic emirate", "Military dictatorship"], 1],
+    [1, "The title of the traditional ruler of the Benin Kingdom is", ["Alaafin", "Oba", "Emir", "Mai"], 1],
+    [1, "Before the Shehu dynasty, the ruler of Kanem-Bornu was called the", ["Mai", "Sarki", "Ooni", "Etsu"], 0],
+    [2, "Lagos was annexed as a British colony in", ["1851", "1861", "1900", "1914"], 1],
+    [2, "The Northern and Southern Protectorates were amalgamated in 1914 by", ["Frederick Lugard", "Hugh Clifford", "Arthur Richards", "John Macpherson"], 0],
+    [2, "The name 'Nigeria' was suggested by", ["Mary Slessor", "Flora Shaw", "Herbert Macaulay", "Queen Victoria"], 1],
+    [2, "Britain's policy of ruling through traditional rulers is called", ["Direct rule", "Assimilation", "Indirect rule", "Association"], 2],
+    [2, "Indirect rule was least successful in", ["The North", "The West", "The East", "Lagos Colony"], 2],
+    [2, "The 1922 Clifford Constitution is remembered for introducing the", ["Federal system", "Elective principle", "Presidential system", "Republican status"], 1],
+    [2, "The 1954 Lyttleton Constitution formally established", ["Unitary government", "Federalism", "Military rule", "A republic"], 1],
+    [2, "The Aba Women's Riot took place in", ["1914", "1929", "1945", "1960"], 1],
+    [3, "Nigeria became a republic on", ["1 October 1960", "1 October 1963", "15 January 1966", "29 May 1999"], 1],
+    [3, "The Nigerian Civil War lasted from", ["1966 to 1968", "1967 to 1970", "1970 to 1975", "1960 to 1963"], 1],
+    [3, "The NYSC scheme was established in 1973 under", ["Yakubu Gowon", "Murtala Mohammed", "Olusegun Obasanjo", "Shehu Shagari"], 0],
+    [3, "Nigeria is made up of how many states plus the FCT?", ["30", "36", "19", "12"], 1],
+    [3, "The principle that public appointments should reflect Nigeria's diversity is", ["Indirect rule", "Federal character", "Amalgamation", "Regionalism"], 1],
+    [4, "A marriage in which a man has more than one wife is", ["Monogamy", "Polyandry", "Polygyny", "Endogamy"], 2],
+    [4, "Tracing descent through the mother's line is", ["Patrilineal", "Matrilineal", "Bilateral", "Neolocal"], 1]
+  ],
+  fib: [
+    [2, "Nigeria gained independence on 1 October ____.", ["1960"]],
+    [2, "The amalgamation of 1914 was carried out by Lord ____.", ["lugard", "frederick lugard"]],
+    [3, "The Federal Capital moved from Lagos to ____ in 1991.", ["abuja"]],
+    [3, "Nigeria has ____ local government areas.", ["774"]],
+    [1, "Usman dan Fodio's jihad led to the creation of the ____ Caliphate.", ["sokoto"]],
+    [3, "The 3Rs after the civil war were Reconciliation, Reconstruction and ____.", ["rehabilitation"]],
+    [0, "The belief that one's own culture is superior to others is called ____.", ["ethnocentrism"]],
+    [2, "The first Nigerian political party, the NNDP, was founded in 1923 by Herbert ____.", ["macaulay"]],
+    [1, "The king of the Old Oyo Empire was called the ____.", ["alaafin", "alafin"]],
+    [3, "The Republic of Biafra was declared in 1967 by Odumegwu ____.", ["ojukwu"]]
+  ]
+},
+{
+  code: "IFT203", title: "Introduction to Web Technologies", units: 2, cat: "C", source: "noun",
+  modules: [
+    ["Introduction to the World Wide Web", [
+      "ARPANET (1969) was the forerunner of the Internet. TCP/IP became its standard on 1 January 1983.",
+      "Tim Berners-Lee invented the World Wide Web at CERN in 1989. Mosaic (1993) was an early popular graphical browser.",
+      "The Internet is the global network of networks; the Web is a service on it made of linked hypertext pages.",
+      "Browsers (Chrome, Firefox, Edge, Safari) request pages and render HTML, CSS and JavaScript.",
+      "Protocols & ports: HTTP 80, HTTPS 443, FTP 21, SMTP 25 (send mail), POP3 110 and IMAP 143 (receive mail), DNS 53 (names → IP addresses).",
+      "URL parts: protocol/scheme (https), domain (www.nou.edu.ng), path (/index.html).",
+      "OSI model has 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application. TCP/IP model has 4.",
+      "Client-server model: browser (client) sends requests, web server responds."
+    ]],
+    ["HTML fundamentals", [
+      "HTML = HyperText Markup Language. It structures content with elements made of tags and attributes.",
+      "Page skeleton: <!DOCTYPE html>, <html>, <head> (title, meta, links), <body> (visible content).",
+      "Headings <h1> (largest) to <h6>; <p> paragraph; <br> line break and <hr> rule are void (no closing tag).",
+      "Links: <a href=\"…\">. Images: <img src=\"…\" alt=\"…\">. Lists: <ul> bulleted, <ol> numbered, <li> items, <dl> description list.",
+      "Tables: <table>, <tr> row, <th> header cell, <td> data cell; colspan/rowspan merge cells.",
+      "Forms: <form>, <input type=\"text|password|radio|checkbox|submit\">, <select>, <textarea>.",
+      "HTML5 semantic elements: <header>, <nav>, <section>, <article>, <aside>, <footer>. XHTML is a stricter, XML-based HTML."
+    ]],
+    ["Cascading Style Sheets (CSS)", [
+      "CSS controls presentation: colours, fonts, spacing, layout.",
+      "Three ways: inline (style attribute), internal (<style> in head), external (.css file via <link>). Inline usually wins in conflicts.",
+      "Selectors: element (p), class (.menu), id (#menu), group (h1, h2), descendant (nav a).",
+      "Rule syntax: selector { property: value; }.",
+      "Box model (inside out): content → padding → border → margin.",
+      "Cascade and specificity decide which rule applies: id > class > element."
+    ]],
+    ["Introduction to JavaScript", [
+      "JavaScript is a client-side scripting language that makes pages interactive.",
+      "Variables: var (function scope), let (block scope), const (block scope, cannot be reassigned).",
+      "Types: number, string, boolean, undefined, null, object. === checks value and type; == converts types first.",
+      "Functions, conditions (if/else, switch) and loops (for, while) work like other languages.",
+      "Events: click, submit, load — handled with addEventListener or onclick.",
+      "DOM (Document Object Model) represents the page as a tree. Select with getElementById or querySelector; change with innerHTML, textContent, style."
+    ]]
+  ],
+  cards: [
+    ["HTML", "HyperText Markup Language — structures web content."],
+    ["CSS", "Cascading Style Sheets — styles the presentation of HTML."],
+    ["JavaScript", "Client-side scripting language for interactive pages."],
+    ["DOM", "Document Object Model — tree representation of a page that scripts can change."],
+    ["HTTP / HTTPS", "Protocols for transferring web pages; HTTPS is encrypted (port 443)."],
+    ["DNS", "Domain Name System — translates domain names to IP addresses."],
+    ["URL", "Uniform Resource Locator — the address of a resource, e.g. https://nou.edu.ng."],
+    ["SMTP", "Simple Mail Transfer Protocol — sends email (port 25)."],
+    ["POP3 / IMAP", "Protocols for retrieving email from a server."],
+    ["ARPANET", "US network from 1969 that grew into the Internet."],
+    ["Tim Berners-Lee", "Invented the World Wide Web at CERN in 1989."],
+    ["Box model", "Content, padding, border, margin."],
+    ["Void element", "HTML element with no closing tag, e.g. <br>, <img>, <hr>."],
+    ["External stylesheet", "CSS in a separate .css file linked with <link rel=\"stylesheet\">."],
+    ["const", "JS keyword for a block-scoped variable that cannot be reassigned."]
+  ],
+  mcq: [
+    [0, "The World Wide Web was invented in 1989 at CERN by", ["Vint Cerf", "Tim Berners-Lee", "Marc Andreessen", "Bill Gates"], 1],
+    [0, "The forerunner of the Internet, launched in 1969, was", ["NSFNET", "ARPANET", "Ethernet", "Usenet"], 1],
+    [0, "Which protocol transfers web pages between a browser and a web server?", ["FTP", "SMTP", "HTTP", "POP3"], 2],
+    [0, "The default port for HTTPS is", ["80", "21", "443", "25"], 2],
+    [0, "Which protocol is used to SEND email?", ["SMTP", "POP3", "IMAP", "DNS"], 0],
+    [0, "DNS translates", ["IP addresses to MAC addresses", "Domain names to IP addresses", "HTML into CSS", "Emails into packets"], 1],
+    [0, "How many layers does the OSI reference model have?", ["4", "5", "7", "9"], 2],
+    [0, "In the URL https://www.nou.edu.ng/index.html, 'https' is the", ["Domain", "Path", "Protocol", "Port"], 2],
+    [0, "Mosaic (1993) is important in web history because it was", ["The first search engine", "An early popular graphical web browser", "The first email client", "The first programming language"], 1],
+    [1, "HTML stands for", ["Hyper Trainer Marking Language", "HyperText Markup Language", "HyperText Machine Language", "High Transfer Markup Language"], 1],
+    [1, "Which tag produces the largest heading?", ["<h6>", "<head>", "<h1>", "<heading>"], 2],
+    [1, "Which tag creates a hyperlink?", ["<link>", "<a>", "<href>", "<url>"], 1],
+    [1, "Which attribute of <img> provides alternative text?", ["src", "title", "alt", "href"], 2],
+    [1, "Which tag creates a numbered list?", ["<ul>", "<ol>", "<li>", "<dl>"], 1],
+    [1, "A table row is defined with", ["<td>", "<th>", "<tr>", "<row>"], 2],
+    [1, "Which attribute makes a table cell span two columns?", ["rowspan", "colspan", "span", "cellspan"], 1],
+    [1, "Which of these is a void element with no closing tag?", ["<p>", "<br>", "<div>", "<table>"], 1],
+    [1, "Content shown in the browser window goes inside the", ["<head> element", "<title> element", "<body> element", "<meta> element"], 2],
+    [2, "CSS stands for", ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style Sheets", "Colourful Style Syntax"], 1],
+    [2, "Which CSS selector targets an element with id=\"menu\"?", [".menu", "#menu", "menu", "*menu"], 1],
+    [2, "Styles placed in a separate .css file and linked with <link> are", ["Inline styles", "Internal styles", "External styles", "Embedded scripts"], 2],
+    [2, "In the CSS box model, the space between the content and the border is the", ["Margin", "Padding", "Outline", "Gutter"], 1],
+    [2, "When inline, internal and external styles conflict on the same property, which usually wins?", ["External", "Internal", "Inline", "Browser default"], 2],
+    [3, "Which keyword declares a block-scoped variable that cannot be reassigned?", ["var", "let", "const", "static"], 2],
+    [3, "In JavaScript, '5' === 5 evaluates to", ["true", "false", "undefined", "NaN"], 1, "=== compares type too: string vs number."],
+    [3, "Which method selects an element by its id?", ["document.getElementByName()", "document.getElementById()", "document.queryId()", "window.findId()"], 1],
+    [3, "DOM stands for", ["Data Object Model", "Document Object Model", "Digital Ordinance Model", "Document Oriented Markup"], 1],
+    [3, "Which property replaces the HTML content inside an element?", ["innerHTML", "textStyle", "nodeType", "tagName"], 0]
+  ],
+  fib: [
+    [1, "The declaration <!____ html> tells the browser the page is HTML5.", ["doctype"]],
+    [1, "The ____ attribute of the <a> tag gives the link destination.", ["href"]],
+    [1, "The <____> element holds the page title and metadata, not visible content.", ["head"]],
+    [2, "In CSS, a class selector begins with a ____.", ["dot", "full stop", "period", "."]],
+    [2, "The CSS box model from inside out is content, padding, border and ____.", ["margin"]],
+    [0, "HTTP stands for HyperText ____ Protocol.", ["transfer"]],
+    [0, "The protocol used to upload and download files between computers is ____.", ["ftp", "file transfer protocol"]],
+    [0, "A program used to access and display web pages is called a web ____.", ["browser"]],
+    [3, "JavaScript prints messages to the browser console with console.____().", ["log"]],
+    [3, "A click handler is attached to an element with element.addEvent____(\"click\", fn).", ["listener"]]
+  ]
+},
+{
+  code: "IFT205", title: "Introduction to Information Technology", units: 2, cat: "C", source: "ccmas",
+  modules: [
+    ["IT, data & information", [
+      "IT = use of computers, storage, networks and processes to create, store, process and exchange information. ICT adds communication.",
+      "Data = raw facts. Information = processed, meaningful data. GIGO: Garbage In, Garbage Out.",
+      "Computer cycle: Input → Process → Output, with Storage.",
+      "Characteristics of computers: speed, accuracy, storage, diligence, automation, versatility."
+    ]],
+    ["History & generations", [
+      "Early aids: abacus, Pascal's calculator, Jacquard loom (punched cards), Babbage's Analytical Engine (father of the computer), Ada Lovelace (first programmer).",
+      "1st generation (1940s–56): vacuum tubes, e.g. ENIAC (1946), UNIVAC.",
+      "2nd (1956–63): transistors. 3rd (1964–71): integrated circuits. 4th (1971–present): microprocessors / VLSI. 5th: artificial intelligence.",
+      "Classification by size: supercomputer, mainframe, minicomputer, microcomputer. By type: analog, digital, hybrid."
+    ]],
+    ["Hardware", [
+      "CPU = Control Unit (directs operations) + ALU (arithmetic & logic) + registers.",
+      "Primary memory: RAM (volatile, read/write) and ROM (non-volatile, read-only). Cache is fast memory near the CPU.",
+      "Secondary storage: hard disk, SSD, flash drive, optical discs.",
+      "Units: bit → byte (8 bits) → KB (1024 bytes) → MB → GB → TB.",
+      "Input: keyboard, mouse, scanner, microphone. Output: monitor, printer, plotter, speaker. Both: touchscreen."
+    ]],
+    ["Software", [
+      "System software: operating system (Windows, Linux, macOS, Android), utilities, translators, device drivers.",
+      "Application software: word processors, spreadsheets, browsers, games.",
+      "Firmware: software stored permanently on chips (e.g. BIOS).",
+      "Licensing: proprietary, open source, freeware, shareware."
+    ]],
+    ["Networks, Internet & IT in society", [
+      "Network types: PAN, LAN (building/campus), MAN (city), WAN (country/world). The Internet is the largest WAN.",
+      "Devices: router (between networks), switch, hub, modem. Intranet = private network using Internet technology.",
+      "Applications: e-learning, e-commerce, e-banking, e-government, health.",
+      "Issues: privacy, piracy and copyright, cybercrime, viruses, e-waste, digital divide.",
+      "IT careers: programmer, systems analyst, network admin, database admin, web developer, security analyst."
+    ]]
+  ],
+  cards: [
+    ["Data", "Raw, unprocessed facts and figures."],
+    ["Information", "Processed data that is meaningful and useful."],
+    ["GIGO", "Garbage In, Garbage Out — bad input gives bad output."],
+    ["Charles Babbage", "Designed the Analytical Engine; called the father of the computer."],
+    ["Ada Lovelace", "Regarded as the first computer programmer."],
+    ["1st generation", "Vacuum tubes (e.g. ENIAC, 1946)."],
+    ["2nd generation", "Transistors."],
+    ["3rd generation", "Integrated circuits."],
+    ["4th generation", "Microprocessors (VLSI)."],
+    ["ALU", "Arithmetic Logic Unit — does calculations and comparisons."],
+    ["Control Unit", "Directs and coordinates all CPU operations."],
+    ["RAM", "Volatile, read/write main memory."],
+    ["ROM", "Non-volatile, read-only memory."],
+    ["Firmware", "Software stored permanently on hardware, e.g. BIOS."],
+    ["Intranet", "Private network inside an organisation using Internet technology."]
+  ],
+  mcq: [
+    [0, "Raw, unprocessed facts are called", ["Information", "Data", "Knowledge", "Wisdom"], 1],
+    [0, "Processed data that is meaningful is", ["Data", "Information", "Noise", "Input"], 1],
+    [0, "The basic operation cycle of a computer is", ["Input – Process – Output – Storage", "Store – Print – Delete", "Plan – Code – Test", "Boot – Load – Run"], 0],
+    [1, "Who is called the father of the computer?", ["Blaise Pascal", "Charles Babbage", "Alan Turing", "John von Neumann"], 1],
+    [1, "The first computer programmer is generally recognised as", ["Ada Lovelace", "Grace Hopper", "Herman Hollerith", "Joseph Jacquard"], 0],
+    [1, "First-generation computers used", ["Transistors", "Vacuum tubes", "Integrated circuits", "Microprocessors"], 1],
+    [1, "Second-generation computers used", ["Vacuum tubes", "Transistors", "VLSI chips", "AI chips"], 1],
+    [1, "Integrated circuits characterise the ___ generation", ["First", "Second", "Third", "Fifth"], 2],
+    [1, "The microprocessor is associated with the ___ generation", ["Second", "Third", "Fourth", "First"], 2],
+    [1, "Artificial intelligence is the focus of the ___ generation", ["Third", "Fourth", "Fifth", "Second"], 2],
+    [1, "ENIAC, completed in 1946, was built with", ["Transistors", "Vacuum tubes", "Microchips", "Integrated circuits"], 1],
+    [2, "Which part of the CPU performs arithmetic and logical operations?", ["Control Unit", "ALU", "Cache", "Bus"], 1],
+    [2, "Which memory is volatile?", ["ROM", "RAM", "Hard disk", "Flash drive"], 1],
+    [2, "1 byte equals", ["4 bits", "8 bits", "16 bits", "1024 bits"], 1],
+    [2, "1 kilobyte (binary) equals", ["1000 bytes", "1024 bytes", "1024 bits", "512 bytes"], 1],
+    [2, "Which is an input device?", ["Monitor", "Printer", "Scanner", "Speaker"], 2],
+    [2, "Which is an output device?", ["Keyboard", "Mouse", "Plotter", "Microphone"], 2],
+    [2, "Which device works for both input and output?", ["Touchscreen", "Scanner", "Joystick", "Projector"], 0],
+    [3, "Software that manages hardware and provides services to other programs is", ["Application software", "An operating system", "A game", "A spreadsheet"], 1],
+    [3, "Which of these is application software?", ["Windows 11", "Linux kernel", "Microsoft Word", "BIOS"], 2],
+    [3, "Software whose source code is free to view and modify is", ["Proprietary", "Open source", "Shareware", "Malware"], 1],
+    [4, "A network covering a single building or campus is a", ["WAN", "LAN", "MAN", "PAN"], 1],
+    [4, "The largest WAN in the world is", ["An intranet", "The Internet", "Ethernet", "Bluetooth"], 1],
+    [4, "A device that forwards data packets between different networks is a", ["Hub", "Router", "Repeater", "Keyboard"], 1],
+    [4, "Making unauthorised copies of software violates", ["Copyright", "Patent only", "Trademark only", "Privacy law only"], 0],
+    [4, "Using IT to deliver learning at a distance, as NOUN does, is", ["E-commerce", "E-learning", "E-banking", "E-waste"], 1]
+  ],
+  fib: [
+    [0, "ICT stands for Information and ____ Technology.", ["communication", "communications"]],
+    [0, "GIGO stands for Garbage In, Garbage ____.", ["out"]],
+    [2, "CPU stands for Central ____ Unit.", ["processing"]],
+    [2, "The ____ Unit of the CPU directs and coordinates all operations.", ["control"]],
+    [2, "Read-only memory is abbreviated ____.", ["rom"]],
+    [2, "1 megabyte = 1024 ____.", ["kilobytes", "kb", "kilobyte"]],
+    [1, "Charles Babbage designed the Analytical ____.", ["engine"]],
+    [3, "Software stored permanently on hardware chips, such as BIOS, is called ____.", ["firmware"]],
+    [4, "A malicious program that attaches itself to files and spreads is a ____.", ["virus"]],
+    [4, "A private network that uses Internet technology inside an organisation is an ____.", ["intranet"]]
+  ]
+},
+{
+  code: "IFT211", title: "Digital Logic Design", units: 2, cat: "C", source: "noun",
+  modules: [
+    ["Number systems, codes, gates & Boolean algebra", [
+      "Bases: binary 2, octal 8, decimal 10, hexadecimal 16 (A=10 … F=15). Convert to decimal by place values; from decimal by repeated division.",
+      "1's complement: flip every bit. 2's complement: 1's complement + 1 (used for signed subtraction).",
+      "Codes: BCD (each decimal digit as 4 bits), Gray code (consecutive values differ by one bit), ASCII, Excess-3, parity bits for error detection.",
+      "Gates: AND (1 only if all 1), OR (1 if any 1), NOT (inverts), NAND, NOR, XOR (1 if inputs differ), XNOR (1 if same). NAND and NOR are universal gates.",
+      "Boolean laws: A+0=A, A·1=A, A+A'=1, A·A'=0, A+A=A, A+AB=A (absorption), A+A'B=A+B.",
+      "De Morgan: (A·B)' = A'+B' and (A+B)' = A'·B'.",
+      "Canonical forms: sum of minterms (SOP) and product of maxterms (POS)."
+    ]],
+    ["Minimization techniques", [
+      "Karnaugh map: n variables → 2ⁿ cells (4-variable map = 16 cells). Adjacent cells differ by one bit (Gray order).",
+      "Group 1s in powers of two (1, 2, 4, 8). A group of 2ⁿ cells removes n variables.",
+      "Don't-care conditions (X) can be treated as 1 or 0 to make bigger groups.",
+      "Quine–McCluskey (tabular) method suits many variables. Prime implicants cover groups of minterms.",
+      "Physical gate properties: fan-in, fan-out, propagation delay, noise margin, power dissipation; logic families TTL and CMOS."
+    ]],
+    ["Combinational circuits & latches", [
+      "Combinational output depends only on present inputs (no memory).",
+      "Half adder: Sum = A⊕B, Carry = A·B. Full adder adds A, B and Carry-in.",
+      "Half subtractor: Difference = A⊕B, Borrow = A'·B.",
+      "Multiplexer (MUX): many inputs → one output; 2ⁿ inputs need n select lines. Demultiplexer: one input → many outputs.",
+      "Decoder: n inputs → 2ⁿ outputs (3-to-8). Encoder does the reverse; priority encoder handles multiple active inputs.",
+      "SR latch (NOR): S=1,R=1 is the invalid/forbidden state. Latches are level-triggered; flip-flops are edge-triggered."
+    ]],
+    ["Sequential circuits", [
+      "Sequential output depends on present inputs and past state (memory), usually synchronised by a clock.",
+      "Flip-flops: SR, D (output follows D), JK (J=K=1 toggles), T (T=1 toggles).",
+      "Flip-flop conversion uses excitation tables to build one type from another.",
+      "Registers store bits; shift registers move data: SISO, SIPO, PISO, PIPO.",
+      "Counters: asynchronous (ripple) or synchronous. An n-bit counter has 2ⁿ states (MOD-2ⁿ)."
+    ]],
+    ["Memory & programmable logic", [
+      "RAM is volatile (SRAM uses flip-flops, DRAM uses capacitors needing refresh). ROM is non-volatile.",
+      "ROM types: PROM (program once), EPROM (erase with UV light), EEPROM (erase electrically), Flash.",
+      "PLA: programmable AND array and programmable OR array. PAL: programmable AND, fixed OR.",
+      "PLDs include SPLD and CPLD. FPGA = Field-Programmable Gate Array: configurable logic blocks and interconnects, reprogrammable in the field."
+    ]]
+  ],
+  cards: [
+    ["2's complement", "Invert all bits (1's complement) then add 1."],
+    ["Gray code", "Binary code where consecutive values differ by exactly one bit."],
+    ["BCD", "Binary Coded Decimal: each decimal digit as 4 bits. 59 = 0101 1001."],
+    ["Universal gates", "NAND and NOR — any logic function can be built with only one of them."],
+    ["XOR", "Outputs 1 when the inputs are different."],
+    ["De Morgan's theorems", "(AB)' = A' + B'  and  (A+B)' = A'B'."],
+    ["Absorption law", "A + AB = A ;  A(A + B) = A."],
+    ["Karnaugh map", "Grid for simplifying Boolean expressions by grouping adjacent 1s."],
+    ["Don't care", "Input condition whose output doesn't matter; can be grouped as 1 or 0."],
+    ["Half adder", "Sum = A⊕B, Carry = AB."],
+    ["Multiplexer", "Selects one of 2ⁿ inputs using n select lines."],
+    ["Decoder", "Converts n inputs into one of 2ⁿ outputs."],
+    ["JK flip-flop", "J=K=1 toggles; J=1,K=0 sets; J=0,K=1 resets; J=K=0 holds."],
+    ["D flip-flop", "Output takes the value of D at the clock edge."],
+    ["PLA vs PAL", "PLA: both AND and OR arrays programmable. PAL: AND programmable, OR fixed."],
+    ["FPGA", "Field-Programmable Gate Array — reconfigurable logic blocks."]
+  ],
+  mcq: [
+    [0, "(1011)₂ in decimal is", ["9", "11", "13", "10"], 1, "8 + 0 + 2 + 1 = 11."],
+    [0, "(25)₁₀ in binary is", ["11001", "10101", "11010", "10011"], 0, "16 + 8 + 1 = 25."],
+    [0, "(2F)₁₆ in decimal is", ["47", "45", "32", "63"], 0, "2×16 + 15 = 47."],
+    [0, "(17)₈ in decimal is", ["15", "17", "9", "13"], 0, "1×8 + 7 = 15."],
+    [0, "The 1's complement of 10110 is", ["01001", "01010", "10111", "11001"], 0],
+    [0, "The 2's complement of 0101 (4-bit) is", ["1010", "1011", "1101", "0110"], 1, "Invert → 1010, add 1 → 1011."],
+    [0, "The BCD code for decimal 59 is", ["0101 1001", "0011 1011", "111011", "1001 0101"], 0],
+    [0, "The Gray code for binary 0110 is", ["0101", "0110", "0111", "0100"], 0, "Keep MSB, then XOR neighbouring bits: 0, 0⊕1, 1⊕1, 1⊕0 = 0101."],
+    [0, "Which gate outputs 1 only when all inputs are 1?", ["OR", "AND", "NAND", "XOR"], 1],
+    [0, "Which gate outputs 1 when its two inputs are different?", ["XNOR", "XOR", "NOR", "AND"], 1],
+    [0, "NAND and NOR are called universal gates because", ["They are the fastest", "Any logic function can be built from only one of them", "They have three inputs", "They store data"], 1],
+    [0, "By De Morgan's theorem, (A·B)' equals", ["A'·B'", "A' + B'", "A + B", "(A + B)'"], 1],
+    [0, "A + A'B simplifies to", ["A", "B", "A + B", "AB"], 2],
+    [0, "A + AB simplifies to", ["A", "B", "AB", "A + B"], 0],
+    [0, "An SOP expression in which every term contains all the variables is in", ["Minimal form", "Canonical form", "Gray form", "Hex form"], 1],
+    [1, "In a K-map, adjacent cells differ by", ["Two bits", "One bit", "All bits", "No bits"], 1],
+    [1, "A 4-variable K-map has how many cells?", ["8", "16", "4", "32"], 1],
+    [1, "Grouping 4 adjacent 1s in a 4-variable K-map eliminates how many variables?", ["1", "2", "3", "4"], 1],
+    [1, "Entries whose output may be 0 or 1 without affecting the design are", ["Prime implicants", "Don't-care conditions", "Minterms", "Maxterms"], 1],
+    [1, "The number of gate inputs a gate output can drive is its", ["Fan-in", "Fan-out", "Noise margin", "Propagation delay"], 1],
+    [2, "A half adder has the outputs", ["Sum and Carry", "Sum and Borrow", "Difference and Carry", "Only Sum"], 0],
+    [2, "The Sum output of a half adder is", ["A·B", "A + B", "A ⊕ B", "(A·B)'"], 2],
+    [2, "A full adder adds", ["2 bits", "3 bits (A, B and carry-in)", "4 bits", "8 bits"], 1],
+    [2, "A circuit that selects one of many inputs and sends it to a single output is a", ["Demultiplexer", "Multiplexer", "Decoder", "Encoder"], 1],
+    [2, "An 8-to-1 multiplexer needs how many select lines?", ["2", "3", "4", "8"], 1],
+    [2, "A 3-to-8 decoder has how many outputs?", ["3", "6", "8", "16"], 2],
+    [2, "An encoder performs the reverse operation of a", ["Multiplexer", "Decoder", "Counter", "Register"], 1],
+    [2, "The invalid state of a NOR-based SR latch occurs when", ["S=0, R=0", "S=1, R=0", "S=0, R=1", "S=1, R=1"], 3],
+    [3, "A JK flip-flop with J = K = 1 will, on each clock pulse,", ["Reset", "Set", "Toggle", "Hold"], 2],
+    [3, "The flip-flop whose output follows its input at the clock edge is the", ["JK", "T", "D", "SR"], 2],
+    [3, "Combinational circuits differ from sequential circuits because their outputs depend on", ["Present inputs only", "Past outputs", "The clock only", "Stored states"], 0],
+    [3, "A 4-bit binary counter has how many states?", ["4", "8", "16", "15"], 2],
+    [3, "A register that moves its data one position on each clock pulse is a", ["Counter", "Shift register", "Decoder", "Comparator"], 1],
+    [4, "Which memory loses its contents when power is removed?", ["ROM", "EPROM", "RAM", "Flash"], 2],
+    [4, "In a PLA, which arrays are programmable?", ["AND only", "OR only", "Both AND and OR", "Neither"], 2],
+    [4, "In a PAL, the programmable array is the", ["OR array", "AND array", "Both arrays", "Neither"], 1],
+    [4, "FPGA stands for", ["Fixed Program Gate Array", "Field-Programmable Gate Array", "Fast Parallel Gate Adder", "Field-Processing Gate Array"], 1]
+  ],
+  fib: [
+    [0, "(101)₂ + (011)₂ = (____)₂", ["1000"], "5 + 3 = 8 = 1000."],
+    [0, "The base of the hexadecimal number system is ____.", ["16", "sixteen"]],
+    [0, "A gate that inverts its single input is the ____ gate.", ["not", "inverter"]],
+    [0, "By the complement law, A · A' = ____.", ["0", "zero"]],
+    [0, "By the identity law, A + 0 = ____.", ["a"]],
+    [1, "K-map stands for ____ map.", ["karnaugh"]],
+    [2, "A circuit that subtracts two bits giving Difference and Borrow is a half ____.", ["subtractor"]],
+    [2, "A 1-to-4 demultiplexer needs ____ select lines.", ["2", "two"]],
+    [3, "A T flip-flop with T = 1 ____ its output on every clock pulse.", ["toggles", "toggle", "complements"]],
+    [4, "ROM that can be erased with ultraviolet light is called ____.", ["eprom"]]
+  ]
+},
+{
+  code: "IFT213", title: "Multimedia Computing", units: 2, cat: "C", source: "ccmas",
+  modules: [
+    ["Multimedia basics", [
+      "Multimedia combines two or more media: text, images, audio, video and animation, usually delivered by computer.",
+      "Linear multimedia plays start to finish (a film). Non-linear/interactive multimedia lets the user control navigation (games, e-learning).",
+      "Hypertext = text with links; hypermedia = links between text, images, audio and video.",
+      "Applications: education, entertainment, advertising, medicine, virtual reality, web."
+    ]],
+    ["Text & images", [
+      "Fonts: serif (Times New Roman) vs sans-serif (Arial); monospace (Courier).",
+      "Bitmap/raster images are grids of pixels and blur when enlarged. Vector images use mathematical shapes and scale without loss.",
+      "Resolution = pixels per inch (ppi/dpi). Colour depth = bits per pixel: 1-bit = 2 colours, 8-bit = 256, 24-bit ≈ 16.7 million.",
+      "Colour models: RGB (additive, screens), CMYK (subtractive, printing; K = black), HSV/HSL.",
+      "Image formats: BMP (uncompressed), JPEG (lossy, photos), PNG (lossless, transparency), GIF (256 colours, animation), TIFF, SVG (vector)."
+    ]],
+    ["Audio", [
+      "Sound is analog; digitising involves sampling (measuring at intervals) and quantisation (rounding each sample to fixed levels).",
+      "Nyquist theorem: sample at least twice the highest frequency. Human hearing ≈ 20 Hz–20 kHz → CD uses 44.1 kHz.",
+      "CD quality: 44.1 kHz, 16-bit, stereo.",
+      "File size (bytes) = sample rate × bit depth × channels × seconds ÷ 8.",
+      "MIDI stores musical instructions (notes, timing, instrument), not recorded sound, so files are tiny.",
+      "Formats: WAV/AIFF (uncompressed), MP3/AAC (lossy), FLAC (lossless)."
+    ]],
+    ["Video & animation", [
+      "Video is a sequence of frames. Frame rate: film 24 fps, PAL 25 fps (used in Nigeria/Europe), NTSC ≈ 30 fps (29.97).",
+      "Aspect ratios: 4:3, 16:9. Resolutions: SD, HD 1280×720, Full HD 1920×1080, 4K.",
+      "Animation types: cel (hand-drawn on transparent sheets), stop-motion, 2D path, 3D computer animation.",
+      "Keyframes mark important positions; tweening generates the frames in between. Morphing transforms one image into another."
+    ]],
+    ["Compression, authoring & production", [
+      "Lossless compression keeps all data (RLE, Huffman, LZW, PNG, ZIP). Lossy discards some data (JPEG, MP3, MPEG).",
+      "RLE replaces runs of repeated values with a count and the value.",
+      "Codec = coder/decoder software for compressing and decompressing media. MPEG = Moving Picture Experts Group; JPEG = Joint Photographic Experts Group.",
+      "Authoring tools assemble media into a project: card/page-based, icon/flowline-based, time-based.",
+      "Project stages: planning & costing, design & production, testing, delivery."
+    ]]
+  ],
+  cards: [
+    ["Multimedia", "Integration of text, images, audio, video and animation."],
+    ["Hypermedia", "Linked text, graphics, audio and video."],
+    ["Pixel", "Smallest element of a digital image."],
+    ["Bitmap vs vector", "Bitmap = pixel grid, loses quality when scaled. Vector = shapes, scales cleanly."],
+    ["Colour depth", "Bits per pixel; 8-bit = 256 colours, 24-bit ≈ 16.7 million."],
+    ["RGB", "Additive colour model for screens."],
+    ["CMYK", "Cyan, Magenta, Yellow, Key (black) — subtractive model for printing."],
+    ["Sampling", "Measuring an analog signal at regular intervals."],
+    ["Quantisation", "Rounding each sample to the nearest fixed level."],
+    ["Nyquist theorem", "Sample at least twice the highest frequency."],
+    ["MIDI", "Musical Instrument Digital Interface — stores music as instructions."],
+    ["Frame rate", "Frames shown per second (fps)."],
+    ["Tweening", "Generating in-between frames from keyframes."],
+    ["Lossy compression", "Permanently discards some data (JPEG, MP3)."],
+    ["Codec", "Coder/decoder for compressing and decompressing media."]
+  ],
+  mcq: [
+    [0, "Multimedia is best described as", ["Only text and images", "A combination of two or more media such as text, audio, images, video and animation", "Only audio and video", "Hardware plus software"], 1],
+    [0, "Multimedia in which the user controls navigation is", ["Linear", "Non-linear (interactive)", "Analog", "Static"], 1],
+    [0, "Hypermedia extends hypertext by linking", ["Only text documents", "Text, graphics, audio and video", "Only databases", "Only computers"], 1],
+    [1, "An image stored as a grid of pixels is a", ["Vector image", "Bitmap image", "MIDI file", "Font"], 1],
+    [1, "Which type of image can be enlarged without losing quality?", ["Bitmap", "Vector", "JPEG", "BMP"], 1],
+    [1, "The colour model used by computer monitors is", ["CMYK", "RGB", "Pantone", "Greyscale only"], 1],
+    [1, "The colour model used in printing is", ["RGB", "CMYK", "YUV", "HSL"], 1],
+    [1, "An image with 8-bit colour depth can display", ["8 colours", "256 colours", "65,536 colours", "16.7 million colours"], 1],
+    [1, "24-bit colour can display about", ["65 thousand colours", "16.7 million colours", "256 colours", "4 billion colours"], 1],
+    [1, "Fonts with small strokes at the ends of letters, like Times New Roman, are", ["Sans-serif", "Serif", "Monospace", "Script"], 1],
+    [2, "Measuring an analog sound at regular intervals to digitise it is", ["Quantisation", "Sampling", "Compression", "Rendering"], 1],
+    [2, "By the Nyquist theorem, to capture audio up to 20 kHz you must sample at least at", ["10 kHz", "20 kHz", "40 kHz", "80 kHz"], 2],
+    [2, "Audio CD quality is", ["22.05 kHz, 8-bit, mono", "44.1 kHz, 16-bit, stereo", "48 kHz, 24-bit, mono", "8 kHz, 8-bit, mono"], 1],
+    [2, "MIDI files store", ["Recorded sound waves", "Musical instructions such as notes and timing", "Video frames", "Compressed MP3 data"], 1],
+    [2, "The size of 10 seconds of uncompressed mono audio at 8,000 Hz and 8 bits is", ["80,000 bytes", "640,000 bytes", "8,000 bytes", "10,000 bytes"], 0, "8000 × 8 × 1 × 10 ÷ 8 = 80,000 bytes."],
+    [3, "The number of still images shown per second in a video is the", ["Bit rate", "Frame rate", "Sample rate", "Refresh code"], 1],
+    [3, "The PAL video standard uses", ["24 fps", "25 fps", "30 fps", "60 fps"], 1],
+    [3, "Generating the frames between two keyframes is called", ["Rendering", "Tweening", "Sampling", "Dithering"], 1],
+    [3, "Traditional animation drawn on transparent sheets is", ["Cel animation", "Path animation", "3D animation", "Stop-motion"], 0],
+    [4, "Compression that permanently discards some data is", ["Lossless", "Lossy", "Run-length", "Huffman"], 1],
+    [4, "Which format uses lossless compression?", ["JPEG", "MP3", "PNG", "MPEG-4"], 2],
+    [4, "Which image format supports simple animation with up to 256 colours?", ["GIF", "JPEG", "BMP", "TIFF"], 0],
+    [4, "Run-Length Encoding compresses data by", ["Removing high frequencies", "Replacing repeated values with a count and the value", "Converting images to vectors", "Sampling less often"], 1],
+    [4, "MP3 is a compression format for", ["Images", "Audio", "Text", "Animation"], 1],
+    [4, "Software used to assemble text, images, sound and video into a multimedia project is called", ["Authoring tools", "Compilers", "Operating systems", "Codecs"], 0]
+  ],
+  fib: [
+    [1, "The smallest element of a digital image is a ____.", ["pixel"]],
+    [1, "The number of pixels per inch in an image is its ____.", ["resolution"]],
+    [1, "CMYK stands for Cyan, Magenta, Yellow and ____.", ["black", "key"]],
+    [2, "Rounding each sample to the nearest fixed level is called ____.", ["quantisation", "quantization"]],
+    [2, "MIDI stands for Musical Instrument Digital ____.", ["interface"]],
+    [3, "NTSC video runs at about ____ frames per second.", ["30", "29.97"]],
+    [0, "Text containing links to other text is called ____.", ["hypertext"]],
+    [4, "Software that compresses and decompresses audio or video is a ____.", ["codec"]],
+    [4, "JPEG stands for Joint Photographic ____ Group.", ["experts"]],
+    [4, "Compression that keeps all the original data is called ____ compression.", ["lossless"]]
+  ]
+},
+{
+  code: "IFT299", title: "SIWES I", units: 3, cat: "C", source: "ccmas",
+  note: "SIWES is usually graded from your logbook, report and supervisor assessment, not a CBT. Use this to prepare for your report and any defence.",
+  modules: [
+    ["About SIWES", [
+      "SIWES = Students Industrial Work Experience Scheme, established in 1973 by the Industrial Training Fund (ITF).",
+      "ITF was established in 1971 to promote skills in industry. The Federal Government funds SIWES; ITF manages it.",
+      "Supervising agencies: NUC (universities), NBTE (polytechnics), NCCE (colleges of education).",
+      "Aims: bridge the gap between theory and practice, expose students to real equipment and work methods, prepare them for employment."
+    ]],
+    ["During the attachment", [
+      "Register and submit placement forms, e.g. SCAF (Student Commencement of Attachment Form).",
+      "Record daily activities in the SIWES logbook; your supervisor signs it weekly.",
+      "Industry-based supervisor guides you at the workplace. Institution-based supervisor (lecturer) visits and assesses you.",
+      "Typical IT tasks: hardware maintenance, OS installation, networking/cabling, help desk, web or software development, data entry and database work.",
+      "Follow workplace rules: punctuality, safety, confidentiality."
+    ]],
+    ["Report writing & assessment", [
+      "Report structure: title page, certification, dedication, acknowledgement, abstract, table of contents, chapters, conclusion/recommendations, references, appendix.",
+      "Chapters usually cover: introduction to SIWES, company profile (history, structure, services), work done/experience, problems encountered, conclusion.",
+      "Abstract = short summary of the whole report.",
+      "Assessment combines the logbook, the technical report, supervisors' evaluations and sometimes a seminar/defence."
+    ]]
+  ],
+  cards: [
+    ["SIWES", "Students Industrial Work Experience Scheme (1973)."],
+    ["ITF", "Industrial Training Fund — established 1971, manages SIWES."],
+    ["NUC", "National Universities Commission — supervises SIWES in universities."],
+    ["NBTE", "National Board for Technical Education — polytechnics."],
+    ["NCCE", "National Commission for Colleges of Education."],
+    ["SCAF", "Student Commencement of Attachment Form."],
+    ["Logbook", "Daily record of activities during attachment, signed by the supervisor."],
+    ["Industry-based supervisor", "Staff at the company who guides the student."],
+    ["Institution-based supervisor", "Lecturer who visits and assesses the student."],
+    ["Abstract", "Brief summary of the whole report."]
+  ],
+  mcq: [
+    [0, "SIWES stands for", ["Students Industrial Work Experience Scheme", "Student Internship and Work Education Scheme", "Skills Industrial Work Experience Service", "Students In-service Work Experience Scheme"], 0],
+    [0, "SIWES was established in 1973 by the", ["NUC", "ITF", "NYSC", "JAMB"], 1],
+    [0, "The Industrial Training Fund was established in", ["1960", "1971", "1973", "1985"], 1],
+    [0, "SIWES is funded mainly by the", ["Students", "Federal Government", "Employers only", "State governments"], 1],
+    [0, "Which body supervises SIWES in universities?", ["NBTE", "NCCE", "NUC", "WAEC"], 2],
+    [0, "Which body supervises SIWES in polytechnics?", ["NUC", "NBTE", "NCCE", "NECO"], 1],
+    [0, "The main aim of SIWES is to", ["Give students paid jobs", "Bridge the gap between theory and practice", "Replace lectures", "Recruit staff for ITF"], 1],
+    [1, "Daily activities during SIWES are recorded in the", ["Logbook", "Transcript", "Employer's diary", "Attendance register"], 0],
+    [1, "The company staff member who guides the student is the", ["Institution-based supervisor", "Industry-based supervisor", "Area manager", "Course adviser"], 1],
+    [1, "The lecturer who visits to assess the student on placement is the", ["Industry-based supervisor", "Institution-based supervisor", "HR manager", "Security officer"], 1],
+    [1, "Which is a typical SIWES task for an IT student?", ["Hardware maintenance and networking", "Crop farming", "Surgery", "Legal drafting"], 0],
+    [2, "The part of a SIWES report that briefly summarises the whole report is the", ["Acknowledgement", "Abstract", "Dedication", "Appendix"], 1],
+    [2, "Information about the organisation's history, structure and services goes in the", ["Company profile", "Abstract", "References", "Dedication"], 0]
+  ],
+  fib: [
+    [0, "ITF stands for Industrial ____ Fund.", ["training"]],
+    [0, "NUC stands for National Universities ____.", ["commission"]],
+    [0, "NBTE stands for National Board for ____ Education.", ["technical"]],
+    [1, "SCAF stands for Student Commencement of ____ Form.", ["attachment"]],
+    [1, "The student's daily record of work is the SIWES ____.", ["logbook", "log book"]],
+    [2, "The document submitted at the end of SIWES describing your experience is the technical ____.", ["report"]]
+  ]
+},
+{
+  code: "INS207", title: "Introduction to Information Systems", units: 2, cat: "C", source: "ccmas",
+  modules: [
+    ["Data, information & IS concepts", [
+      "An information system (IS) collects, processes, stores and distributes information to support decisions and control.",
+      "Components: hardware, software, data, people, procedures, networks/telecommunications.",
+      "IT is the technology; IS is technology + people + processes working together.",
+      "Qualities of good information: accurate, timely, relevant, complete, concise, cost-effective.",
+      "Data hierarchy: bit → byte → field → record → file → database.",
+      "Data → information → knowledge → wisdom."
+    ]],
+    ["Types of information systems", [
+      "Operational level: TPS (Transaction Processing System) records daily transactions — sales, payroll, POS.",
+      "Management level: MIS produces routine summary reports; DSS supports semi-structured decisions with models and 'what-if' analysis.",
+      "Strategic level: ESS/EIS gives executives summarised internal and external data.",
+      "Knowledge level: KWS (knowledge work systems) and OAS (office automation: word processing, email, scheduling).",
+      "Expert systems mimic a human expert using a knowledge base and inference engine."
+    ]],
+    ["Systems development", [
+      "SDLC (Systems Development Life Cycle): planning, analysis, design, implementation (coding, testing, installation), maintenance.",
+      "Feasibility study: technical, economic (cost-benefit), operational, schedule (TELOS adds legal).",
+      "Models: waterfall (sequential), prototyping, spiral, agile (iterative, incremental), RAD.",
+      "Changeover methods: direct (cut-over), parallel (run both), phased (part by part), pilot (one department first).",
+      "Maintenance is usually the longest and costliest phase."
+    ]],
+    ["Databases & enterprise systems", [
+      "A DBMS (e.g. MySQL, Oracle, MS Access) creates and manages databases. SQL is used to query relational databases.",
+      "Primary key uniquely identifies a record; a foreign key links to the primary key of another table.",
+      "Advantages of databases: less redundancy, consistency, sharing, security, integrity.",
+      "ERP integrates all business functions in one system; CRM manages customer relationships; SCM manages the supply chain."
+    ]],
+    ["IS strategy, e-commerce, security & ethics", [
+      "Porter's five forces: rivalry, threat of new entrants, threat of substitutes, buyer power, supplier power.",
+      "Porter's value chain: primary activities (inbound logistics, operations, outbound logistics, marketing & sales, service) and support activities.",
+      "E-commerce types: B2B, B2C, C2C (e.g. Jiji), G2C, B2G.",
+      "Security: CIA triad (Confidentiality, Integrity, Availability), threats like viruses, hacking, phishing; controls like passwords, encryption, backups.",
+      "Ethics: privacy, intellectual property, accuracy, access."
+    ]]
+  ],
+  cards: [
+    ["Information system", "People, hardware, software, data, procedures and networks working together to provide information."],
+    ["TPS", "Transaction Processing System — records routine transactions."],
+    ["MIS", "Management Information System — routine summary reports for middle managers."],
+    ["DSS", "Decision Support System — models and what-if analysis for semi-structured decisions."],
+    ["ESS / EIS", "Executive Support/Information System for strategic decisions."],
+    ["Expert system", "Knowledge base + inference engine mimicking a human expert."],
+    ["SDLC", "Planning, analysis, design, implementation, maintenance."],
+    ["Parallel changeover", "Old and new systems run together for a period."],
+    ["Pilot changeover", "New system tried in one department first."],
+    ["Primary key", "Field that uniquely identifies each record."],
+    ["Foreign key", "Field that refers to a primary key in another table."],
+    ["ERP", "Enterprise Resource Planning — integrates all business functions."],
+    ["CRM", "Customer Relationship Management."],
+    ["Five forces", "Porter's model of industry competition."],
+    ["B2C", "Business-to-Consumer e-commerce."]
+  ],
+  mcq: [
+    [0, "Which is NOT a component of an information system?", ["People", "Procedures", "Data", "Weather"], 3],
+    [0, "Information that is available when it is needed is", ["Accurate", "Timely", "Complete", "Relevant"], 1],
+    [0, "The correct data hierarchy from smallest to largest is", ["Bit, byte, field, record, file, database", "Byte, bit, record, field, file, database", "Field, bit, byte, record, file, database", "Bit, field, byte, file, record, database"], 0],
+    [0, "A collection of related fields describing one entity is a", ["File", "Record", "Database", "Byte"], 1],
+    [1, "The system that records day-to-day transactions such as sales and payroll is the", ["DSS", "TPS", "EIS", "Expert system"], 1],
+    [1, "Which system produces routine summary reports for middle managers?", ["TPS", "MIS", "Expert system", "OAS"], 1],
+    [1, "Which system helps managers analyse semi-structured problems with models and what-if analysis?", ["TPS", "DSS", "OAS", "CRM"], 1],
+    [1, "Senior executives making strategic decisions mainly use", ["ESS/EIS", "TPS", "OAS", "POS"], 0],
+    [1, "A system that mimics the reasoning of a human expert is a(n)", ["Expert system", "Payroll system", "Office system", "TPS"], 0],
+    [1, "Word processing, email and electronic calendars are examples of", ["Office automation systems", "Expert systems", "DSS", "ERP"], 0],
+    [2, "SDLC stands for", ["System Design Life Cycle", "Systems Development Life Cycle", "Software Delivery Logic Chain", "System Data Link Control"], 1],
+    [2, "The SDLC phase that studies the current system and gathers requirements is", ["Design", "Analysis", "Implementation", "Maintenance"], 1],
+    [2, "Checking whether a proposed system's benefits outweigh its costs is ___ feasibility", ["Technical", "Economic", "Operational", "Schedule"], 1],
+    [2, "Running the old and new systems together for a period is ___ changeover", ["Direct", "Parallel", "Phased", "Pilot"], 1],
+    [2, "Introducing a new system in one department before the rest is ___ changeover", ["Pilot", "Direct", "Parallel", "Big-bang"], 0],
+    [2, "Which model completes each phase fully before moving to the next?", ["Agile", "Waterfall", "Prototyping", "Spiral"], 1],
+    [3, "A field that uniquely identifies each record in a table is the", ["Foreign key", "Primary key", "Composite field", "Index card"], 1],
+    [3, "Software used to create and manage databases is a", ["DBMS", "CRM", "CAD", "OCR"], 0],
+    [3, "Which language is used to query relational databases?", ["HTML", "SQL", "CSS", "XML"], 1],
+    [3, "A system that integrates finance, HR, production and sales into one database is", ["ERP", "CRM", "SCM", "TPS"], 0],
+    [3, "Software for managing a company's interactions with customers is", ["ERP", "CRM", "SCM", "MIS"], 1],
+    [4, "Who proposed the five competitive forces model?", ["Michael Porter", "Peter Drucker", "Henri Fayol", "Abraham Maslow"], 0],
+    [4, "A business selling directly to consumers online is", ["B2B", "B2C", "C2C", "G2C"], 1],
+    [4, "Websites where individuals sell to other individuals are", ["B2B", "B2C", "C2C", "B2G"], 2],
+    [4, "The CIA triad in information security stands for", ["Confidentiality, Integrity, Availability", "Control, Information, Access", "Computer, Internet, Application", "Cost, Investment, Accounting"], 0]
+  ],
+  fib: [
+    [0, "Raw facts become ____ after processing.", ["information"]],
+    [0, "MIS stands for Management Information ____.", ["system", "systems"]],
+    [1, "TPS stands for Transaction ____ System.", ["processing"]],
+    [1, "DSS stands for Decision ____ System.", ["support"]],
+    [2, "The last and usually longest phase of the SDLC is ____.", ["maintenance"]],
+    [2, "A working model built quickly to test ideas with users is a ____.", ["prototype"]],
+    [3, "A field that refers to the primary key of another table is a ____ key.", ["foreign"]],
+    [3, "ERP stands for Enterprise Resource ____.", ["planning"]],
+    [3, "SCM stands for Supply Chain ____.", ["management"]],
+    [4, "Porter's ____ chain divides a firm's activities into primary and support activities.", ["value"]]
+  ]
+},
+{
+  code: "PHY108", title: "General Practical Physics II", units: 1, cat: "C", source: "ccmas",
+  modules: [
+    ["Measurement, errors & graphs", [
+      "Systematic errors shift all readings one way (zero error, faulty calibration); they are not removed by averaging. Random errors vary and are reduced by repeated readings.",
+      "Parallax error: reading a scale at an angle — read with the eye perpendicular to the scale.",
+      "Accuracy = closeness to the true value. Precision = closeness of repeated readings to each other.",
+      "Percentage error = |measured − true| ÷ true × 100%.",
+      "Vernier caliper least count 0.01 cm (0.1 mm). Micrometer screw gauge least count 0.01 mm.",
+      "Significant figures: leading zeros don't count; trailing zeros after the decimal point do (0.04050 has 4).",
+      "Graphs: label axes with units, choose a sensible scale, draw the line of best fit, slope = Δy/Δx using a large triangle."
+    ]],
+    ["Electricity experiments", [
+      "Ohm's law: V = IR. Slope of V–I graph = R. Ammeter goes in series, voltmeter in parallel.",
+      "Series: R = R₁ + R₂ + … . Parallel: 1/R = 1/R₁ + 1/R₂ + … .",
+      "Internal resistance: E = I(R + r), so terminal p.d. V = E − Ir.",
+      "Meter bridge (Wheatstone bridge principle): X/R = l/(100 − l) at balance (galvanometer shows zero).",
+      "Potentiometer compares emfs: E₁/E₂ = l₁/l₂. It draws no current at balance, so it measures true emf.",
+      "Rheostat = variable resistor to control current. Galvanometer detects small currents."
+    ]],
+    ["Optics experiments", [
+      "Refraction through a glass block: n = sin i / sin r (Snell's law). Plot sin i against sin r; slope = n.",
+      "Critical angle C: sin C = 1/n. Total internal reflection happens going from denser to less dense medium when i > C.",
+      "Lens/mirror formula: 1/f = 1/u + 1/v (real-is-positive). Magnification m = v/u.",
+      "Locate images with the no-parallax method using pins.",
+      "Plotting 1/v against 1/u gives intercepts of 1/f on both axes."
+    ]],
+    ["Magnetism", [
+      "Field lines go from North to South outside a magnet and never cross.",
+      "Plot field lines with a plotting compass; iron filings show the pattern.",
+      "Neutral point: where the magnet's field cancels the Earth's horizontal field; a compass there points in no fixed direction.",
+      "A current-carrying solenoid behaves like a bar magnet; right-hand grip rule gives its polarity."
+    ]]
+  ],
+  cards: [
+    ["Systematic error", "Error that shifts all readings in one direction, e.g. zero error."],
+    ["Random error", "Unpredictable variation, reduced by averaging many readings."],
+    ["Parallax error", "Error from reading a scale at an angle."],
+    ["Accuracy vs precision", "Accuracy: near true value. Precision: repeated readings agree."],
+    ["Vernier caliper", "Least count 0.01 cm (0.1 mm)."],
+    ["Micrometer screw gauge", "Least count 0.01 mm."],
+    ["Ohm's law", "V = IR at constant temperature."],
+    ["Internal resistance", "E = I(R + r)."],
+    ["Meter bridge", "X/R = l/(100 − l) at balance."],
+    ["Potentiometer", "E₁/E₂ = l₁/l₂; draws no current at balance."],
+    ["Snell's law", "n = sin i / sin r."],
+    ["Critical angle", "sin C = 1/n."],
+    ["Lens formula", "1/f = 1/u + 1/v; magnification m = v/u."],
+    ["Neutral point", "Where the magnet's field cancels Earth's horizontal field."]
+  ],
+  mcq: [
+    [0, "Errors that always shift readings in the same direction, such as zero error, are", ["Random errors", "Systematic errors", "Gross errors", "Human luck"], 1],
+    [0, "Errors that are reduced by taking many readings and averaging are", ["Systematic errors", "Random errors", "Zero errors", "Calibration errors"], 1],
+    [0, "Reading a scale from an angle introduces", ["Zero error", "Parallax error", "Random noise", "End error"], 1],
+    [0, "How many significant figures are in 0.04050?", ["3", "4", "5", "6"], 1, "Leading zeros don't count; 4, 0, 5, 0 do."],
+    [0, "The least count of a standard vernier caliper is", ["0.1 cm", "0.01 cm", "0.001 cm", "1 cm"], 1],
+    [0, "The least count of a standard micrometer screw gauge is", ["0.1 mm", "0.01 mm", "0.001 mm", "1 mm"], 1],
+    [0, "A length is measured as 9.8 cm; the true value is 10.0 cm. The percentage error is", ["0.2%", "2%", "20%", "9.8%"], 1, "0.2 ÷ 10.0 × 100 = 2%."],
+    [0, "In a graph of V (y-axis) against I (x-axis) for a resistor, the slope gives", ["Current", "Resistance", "Power", "Charge"], 1],
+    [1, "An ammeter is connected ___ and a voltmeter ___ with the component", ["in parallel / in series", "in series / in parallel", "both in series", "both in parallel"], 1],
+    [1, "Three 6 Ω resistors connected in parallel give", ["18 Ω", "2 Ω", "3 Ω", "6 Ω"], 1, "1/R = 3/6, so R = 2 Ω."],
+    [1, "Resistors of 4 Ω and 6 Ω in series give", ["2.4 Ω", "10 Ω", "24 Ω", "1.5 Ω"], 1],
+    [1, "A cell of emf 3 V and internal resistance 1 Ω is connected to a 5 Ω resistor. The current is", ["0.6 A", "0.5 A", "3 A", "0.75 A"], 1, "I = E/(R + r) = 3/6 = 0.5 A."],
+    [1, "The meter bridge works on the principle of the", ["Potentiometer", "Wheatstone bridge", "Ohmmeter", "Transformer"], 1],
+    [1, "On a meter bridge, balance is at 40 cm from the unknown X's end, with a known 6 Ω resistor in the other gap. X is", ["4 Ω", "9 Ω", "2.4 Ω", "6 Ω"], 0, "X/6 = 40/60, so X = 4 Ω."],
+    [1, "A potentiometer is preferred to a voltmeter for measuring emf because it", ["Is cheaper", "Draws no current at balance", "Has lower resistance", "Is digital"], 1],
+    [1, "Two cells balance at 60 cm and 40 cm on a potentiometer wire. E₁ : E₂ is", ["2 : 3", "3 : 2", "1 : 1", "4 : 9"], 1],
+    [2, "The refractive index of a glass block from angle of incidence i and refraction r is", ["sin r / sin i", "sin i / sin r", "i / r", "cos i / cos r"], 1],
+    [2, "An object 30 cm from a converging lens of focal length 10 cm forms an image at", ["15 cm", "20 cm", "7.5 cm", "30 cm"], 0, "1/v = 1/10 − 1/30 = 2/30, so v = 15 cm."],
+    [2, "Linear magnification produced by a lens is", ["u/v", "v/u", "f/u", "u × v"], 1],
+    [2, "Images in pin experiments are located accurately using the", ["No-parallax method", "Zero method", "Null-deflection method", "Ray-box method"], 0],
+    [2, "Total internal reflection occurs when light travels", ["From less dense to denser medium", "From denser to less dense medium at an angle greater than the critical angle", "In any medium at 90°", "From air into glass at small angles"], 1],
+    [3, "Outside a bar magnet, magnetic field lines run from", ["South to North", "North to South", "East to West", "The centre outward"], 1],
+    [3, "A point where the magnet's field cancels the Earth's horizontal field is a", ["Neutral point", "Pole", "Focus", "Node"], 0],
+    [3, "The instrument used to plot magnetic field lines is a", ["Plotting compass", "Ammeter", "Rheostat", "Galvanometer"], 0]
+  ],
+  fib: [
+    [1, "Ohm's law states that V = I × ____.", ["r", "resistance"]],
+    [1, "A variable resistor used to adjust current in a circuit is a ____.", ["rheostat"]],
+    [1, "The SI unit of resistance is the ____.", ["ohm", "ohms"]],
+    [1, "A sensitive instrument that shows zero current at balance is a ____.", ["galvanometer"]],
+    [2, "The lens formula is 1/f = 1/u + 1/____.", ["v"]],
+    [2, "The angle of incidence in the denser medium that gives a refraction angle of 90° is the ____ angle.", ["critical"]],
+    [0, "An instrument that does not read zero when it should has a ____ error.", ["zero"]],
+    [0, "The closeness of a measurement to the true value is its ____.", ["accuracy"]]
+  ]
+},
+{
+  code: "CYB111", title: "Fundamentals of Cyber Security", units: 2, cat: "E", source: "noun",
+  modules: [
+    ["Network & cyber security", [
+      "Cyber security protects systems, networks and data from digital attacks.",
+      "CIA triad: Confidentiality (only authorised access), Integrity (no unauthorised change), Availability (accessible when needed).",
+      "Network types: PAN, LAN, MAN (city), WAN. Topologies: bus, star, ring, mesh (every node connected to every other), hybrid.",
+      "Design elements: firewalls, routers, switches, DMZ (buffer zone for public servers), VPN (encrypted tunnel over public network), segmentation/VLANs, NAT.",
+      "Compliance & operational security: following laws, standards and policies; risk assessment, change management, training."
+    ]],
+    ["Threats & vulnerabilities", [
+      "Threat = possible danger; vulnerability = weakness; risk = likelihood × impact of a threat exploiting a vulnerability.",
+      "Malware: virus (attaches to files), worm (self-replicates across networks), Trojan (disguised as legitimate), ransomware (encrypts files for payment), spyware, adware, rootkit, keylogger.",
+      "Attacks: phishing, spear phishing (targeted), DoS/DDoS (availability), man-in-the-middle, SQL injection, cross-site scripting (XSS), brute force, password attacks, zero-day exploits.",
+      "Social engineering manipulates people into giving information.",
+      "Risk responses: avoid, transfer (e.g. insurance), mitigate (reduce), accept."
+    ]],
+    ["Security controls & disaster recovery", [
+      "Control types by function: preventive, detective, corrective, deterrent, compensating.",
+      "By nature: administrative (policies, training), technical/logical (firewalls, encryption), physical (locks, guards, CCTV).",
+      "Disaster recovery plan (DRP) restores IT after disaster; Business continuity plan (BCP) keeps the business running.",
+      "RTO = max time to restore; RPO = max acceptable data loss (time).",
+      "Backups: full, incremental (changes since last backup of any type), differential (changes since last full). Sites: hot, warm, cold.",
+      "Host & application security: patching, antivirus, hardening, input validation, data encryption."
+    ]],
+    ["Access control & intrusion management", [
+      "AAA: Authentication (who you are), Authorization (what you may do), Accounting (what you did).",
+      "MFA uses two or more factors: something you know, have, are.",
+      "Access models: DAC (owner decides), MAC (labels/clearance), RBAC (by job role). Principle of least privilege.",
+      "Cryptography: symmetric (one shared key, e.g. AES, DES), asymmetric (public/private keys, e.g. RSA), hashing (one-way digest, e.g. SHA-256).",
+      "IDS detects and alerts (signature-based or anomaly-based; NIDS/HIDS). IPS sits inline and blocks.",
+      "Firewalls: packet-filtering, stateful inspection, proxy/application-level, next-generation."
+    ]],
+    ["Security management & incident response", [
+      "Security policies: acceptable use policy (AUP), password policy, data classification.",
+      "Responding to a breach: contain, investigate, notify, recover, learn.",
+      "Cyber Essentials (UK): firewalls, secure configuration, user access control, malware protection, security update (patch) management.",
+      "NIST Cybersecurity Framework core functions: Identify, Protect, Detect, Respond, Recover (v2.0 adds Govern).",
+      "Incident response phases (NIST): Preparation → Detection & Analysis → Containment, Eradication & Recovery → Post-incident activity."
+    ]]
+  ],
+  cards: [
+    ["CIA triad", "Confidentiality, Integrity, Availability."],
+    ["Vulnerability", "A weakness that a threat can exploit."],
+    ["Worm", "Self-replicating malware that spreads without a host file."],
+    ["Trojan horse", "Malware disguised as legitimate software."],
+    ["Ransomware", "Encrypts files and demands payment."],
+    ["Phishing", "Fraudulent messages that trick users into revealing information."],
+    ["DDoS", "Distributed Denial of Service — floods a target to destroy availability."],
+    ["SQL injection", "Inserting malicious SQL through input fields."],
+    ["Zero-day", "Unknown vulnerability with no available patch."],
+    ["DMZ", "Network zone for public-facing servers between internet and internal LAN."],
+    ["MFA", "Multi-factor authentication: know / have / are."],
+    ["RBAC", "Role-based access control."],
+    ["Least privilege", "Give users only the access they need."],
+    ["Symmetric encryption", "Same key encrypts and decrypts (AES)."],
+    ["Asymmetric encryption", "Public/private key pair (RSA)."],
+    ["IDS vs IPS", "IDS detects and alerts; IPS sits inline and blocks."],
+    ["RTO / RPO", "Recovery Time Objective / Recovery Point Objective."]
+  ],
+  mcq: [
+    [0, "The CIA triad stands for", ["Confidentiality, Integrity, Availability", "Control, Inspection, Audit", "Cyber, Internet, Access", "Cost, Impact, Assurance"], 0],
+    [0, "Ensuring data is not altered without authorisation is", ["Confidentiality", "Integrity", "Availability", "Non-repudiation"], 1],
+    [0, "A DDoS attack mainly targets", ["Confidentiality", "Integrity", "Availability", "Authentication"], 2],
+    [0, "A network covering a city is a", ["LAN", "PAN", "MAN", "WAN"], 2],
+    [0, "In which topology is every node connected to every other node?", ["Star", "Ring", "Bus", "Mesh"], 3],
+    [0, "A buffer network hosting public servers between the Internet and the internal LAN is a", ["VLAN", "DMZ", "VPN", "NAT"], 1],
+    [0, "A VPN provides", ["Faster internet only", "An encrypted tunnel over a public network", "Free Wi-Fi", "Antivirus scanning"], 1],
+    [1, "Malware that self-replicates across networks without needing a host file is a", ["Virus", "Worm", "Trojan", "Spyware"], 1],
+    [1, "Malware disguised as legitimate software is a", ["Worm", "Trojan horse", "Rootkit", "Adware"], 1],
+    [1, "Malware that encrypts files and demands payment is", ["Spyware", "Ransomware", "Adware", "Keylogger"], 1],
+    [1, "Fraudulent emails that trick users into revealing passwords are", ["Phishing", "Sniffing", "Spamming only", "Pharming only"], 0],
+    [1, "Phishing aimed at a specific person or organisation is", ["Vishing", "Spear phishing", "Smishing", "Baiting"], 1],
+    [1, "Inserting malicious SQL statements into an input field is", ["XSS", "SQL injection", "CSRF", "Buffer overflow"], 1],
+    [1, "An attacker secretly intercepting communication between two parties is a", ["Man-in-the-middle attack", "DoS attack", "Brute-force attack", "Worm"], 0],
+    [1, "A vulnerability unknown to the vendor with no patch available is a", ["Zero-day", "Legacy bug", "Backdoor", "Patch gap"], 0],
+    [1, "Buying cyber insurance is an example of risk", ["Avoidance", "Transfer", "Acceptance", "Mitigation"], 1],
+    [2, "Security guards, locks and CCTV are ___ controls", ["Technical", "Administrative", "Physical", "Logical"], 2],
+    [2, "Security policies and staff training are ___ controls", ["Physical", "Administrative", "Technical", "Corrective"], 1],
+    [2, "A backup that copies only data changed since the last backup of any type is", ["Full", "Differential", "Incremental", "Mirror"], 2],
+    [2, "A fully equipped recovery site that can take over almost immediately is a", ["Cold site", "Warm site", "Hot site", "Mobile site"], 2],
+    [2, "The maximum acceptable time to restore a system after a disaster is the", ["RPO", "RTO", "MTBF", "SLA"], 1],
+    [3, "Using a password plus a code sent to your phone is", ["Single sign-on", "Multi-factor authentication", "Role-based access", "Biometrics only"], 1],
+    [3, "Granting access according to a user's job role is", ["DAC", "MAC", "RBAC", "ABAC"], 2],
+    [3, "Giving users only the access they need to do their work is the principle of", ["Least privilege", "Separation of duties", "Defence in depth", "Open access"], 0],
+    [3, "Encryption that uses the same key to encrypt and decrypt is", ["Asymmetric", "Symmetric", "Hashing", "Public-key"], 1],
+    [3, "RSA is an example of", ["Symmetric encryption", "Asymmetric encryption", "Hashing", "Steganography"], 1],
+    [3, "A one-way function that produces a fixed-length digest, such as SHA-256, is", ["Encryption", "Hashing", "Encoding", "Compression"], 1],
+    [3, "An IDS that compares traffic against known attack patterns uses", ["Anomaly-based detection", "Signature-based detection", "Honeypots", "Load balancing"], 1],
+    [3, "Unlike an IDS, an IPS", ["Only logs alerts", "Sits inline and can block traffic", "Cannot detect attacks", "Is a type of antivirus"], 1],
+    [3, "A firewall that tracks the state of active connections is a", ["Packet-filtering firewall", "Stateful inspection firewall", "Hub", "Repeater"], 1],
+    [4, "The core functions of the NIST Cybersecurity Framework (v1.1) are", ["Identify, Protect, Detect, Respond, Recover", "Plan, Do, Check, Act", "Prevent, Detect, Correct", "Assess, Deploy, Monitor, Report"], 0],
+    [4, "The first phase of incident response is", ["Containment", "Preparation", "Eradication", "Lessons learned"], 1],
+    [4, "A document stating what users may and may not do on company systems is the", ["Acceptable Use Policy", "Privacy notice", "Service Level Agreement", "Non-disclosure agreement"], 0]
+  ],
+  fib: [
+    [3, "Verifying who a user is, is called ____.", ["authentication"]],
+    [3, "Granting a verified user permission to use resources is ____.", ["authorization", "authorisation"]],
+    [3, "IDS stands for Intrusion ____ System.", ["detection"]],
+    [3, "IPS stands for Intrusion ____ System.", ["prevention"]],
+    [3, "Converting plaintext into ciphertext is called ____.", ["encryption"]],
+    [1, "Manipulating people into revealing confidential information is social ____.", ["engineering"]],
+    [1, "A weakness that a threat can exploit is a ____.", ["vulnerability"]],
+    [0, "VPN stands for Virtual ____ Network.", ["private"]],
+    [2, "DRP stands for Disaster ____ Plan.", ["recovery"]],
+    [4, "The last phase of incident response, where lessons are reviewed, is post-incident ____.", ["activity", "review", "analysis"]]
+  ]
+}
+];
