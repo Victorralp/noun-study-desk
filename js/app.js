@@ -238,8 +238,8 @@ function homeHTML(){
   h += '<div class="card"><h3>Mock CBT</h3><p class="muted" style="margin:4px 0 12px;font-size:14px">Timed, objective + fill-in-the-gap, like the e-exam.</p>';
   h += '<div class="grid" style="grid-template-columns:1fr 1fr;gap:10px">';
   h += '<label class="f" style="grid-column:1/-1">Course<select id="mkCourse"><option value="ALL">All CBT courses (mixed)</option>' + CBT_CODES.map(function(k){ return '<option value="' + k + '">' + k + ' · ' + esc(BY[k].title) + '</option>'; }).join("") + '</select></label>';
-  h += '<label class="f">Questions<select id="mkCount"><option>20</option><option selected>40</option><option>60</option><option value="0">All</option></select></label>';
-  h += '<label class="f">Minutes<input type="number" id="mkMin" min="1" max="180" value="30"></label>';
+  h += '<label class="f">Questions<select id="mkCount"><option>20</option><option selected>50</option><option>100</option><option value="0">All</option></select></label>';
+  h += '<label class="f">Minutes<input type="number" id="mkMin" min="1" max="180" value="38"></label>';
   h += '</div><button class="btn primary block" id="mkStart" style="margin-top:12px">Start mock exam</button></div>';
   h += '</div>';
 
@@ -470,8 +470,8 @@ function practiceHTML(c){
   var n = c.mcq.length + c.fib.length;
   var h = '<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))"><div class="card"><h3>Start a test</h3><p class="muted" style="font-size:14px">' + c.mcq.length + ' objective + ' + c.fib.length + ' fill-in-the-gap questions in this bank' + (pqCount(c) ? ', including <b>' + pqCount(c) + ' real past questions</b> from the old course code' : "") + '.</p>';
   h += '<div class="grid" style="grid-template-columns:1fr 1fr;gap:10px">';
-  h += '<label class="f">Questions<select id="pCount"><option value="10">10</option><option value="20">20</option><option value="0" selected>All (' + n + ')</option></select></label>';
-  h += '<label class="f">Minutes<input type="number" id="pMin" min="1" max="180" value="' + Math.max(5, Math.round(n * 0.75)) + '"></label>';
+  h += '<label class="f">Questions<select id="pCount"><option value="10">10</option><option value="20">20</option>' + (n >= 50 ? '<option value="50" selected>50</option>' : "") + (n >= 100 ? '<option value="100">100</option>' : "") + '<option value="0"' + (n >= 50 ? "" : " selected") + '>All (' + n + ')</option></select></label>';
+  h += '<label class="f">Minutes<input type="number" id="pMin" min="1" max="180" value="' + Math.max(5, Math.round((n >= 50 ? 50 : n) * 0.75)) + '"></label>';
   h += '<label class="f" style="grid-column:1/-1">Type<select id="pKind"><option value="mix">Objective + fill-in-the-gap</option><option value="mcq">Objective only</option><option value="fib">Fill-in-the-gap only</option>' + (pqCount(c) ? '<option value="pq">Past questions only (' + pqCount(c) + ')</option><option value="orig">Original questions only</option>' : "") + '</select></label>';
   h += '</div><button class="btn primary block" id="pStart" style="margin-top:12px">Start test</button></div>';
   h += '<div class="card"><h3>Tips for the e-exam</h3><ul style="padding-left:18px;margin:8px 0 0;font-size:14px"><li>Answer every question. There is no penalty for a wrong answer.</li><li>Fill-in-the-gap is marked by computer, so spelling must be exact.</li><li>Flag hard questions and come back to them using the number grid.</li><li>Keys: <span class="kbd">A</span>–<span class="kbd">D</span> pick an option, <span class="kbd">N</span>/<span class="kbd">P</span> or the arrow keys move between questions, <span class="kbd">F</span> flags.</li></ul></div></div>';
