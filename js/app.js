@@ -2,7 +2,9 @@
 "use strict";
 var ALL = window.COURSES;
 // Papers on a profile's timetable that have no study pack yet: countdown, course material and the test built from it.
-[["COS102", "Problem Solving", 3], ["IFT191", "Computer Laboratory I", 1], ["PHY107", "General Practical Physics I", 1], ["MTH102", "Elementary Mathematics II", 2], ["GST102", "Use of English and Communication Skills II", 2]].forEach(function(x){
+[["COS102", "Problem Solving", 3], ["IFT191", "Computer Laboratory I", 1], ["PHY107", "General Practical Physics I", 1], ["MTH102", "Elementary Mathematics II", 2], ["GST102", "Use of English and Communication Skills II", 2],
+  ["CIT237", "Programming and Algorithms", 2], ["CIT215", "Introduction to Programming Languages", 3], ["CIT211", "Introduction to Operating Systems", 3], ["CIT217", "Foundations of Sequential Programs", 2], ["CIT191", "Computer Laboratory I", 1],
+  ["GST203", "Introduction to Philosophy and Logic", 2], ["MTH281", "Mathematical Methods I", 3], ["PHY102", "Electricity, Magnetism and Modern Physics", 3]].forEach(function(x){
   if (ALL.some(function(c){ return c.code === x[0]; })) return;
   ALL.push({ code: x[0], title: x[1], units: x[2], cat: "C", source: "noun", modules: [], cards: [], mcq: [], fib: [], stub: true });
 });
@@ -22,6 +24,11 @@ var PROFILES = {
     IFT205: ["2026-11-20", "14:00"], IFT203: ["2026-11-24", "08:30"], IFT191: ["2026-11-26", "08:30"],
     PHY108: ["2026-11-26", "11:00"], PHY107: ["2026-12-01", "11:00"], GST201: ["2026-12-05", "08:30"],
     MTH102: ["2026-12-05", "08:30"], GST102: ["2026-12-09", "08:30"]
+  } },
+  marley: { name: "Marley", courses: ["CIT237", "CIT215", "CIT211", "CIT217", "CIT191", "GST203", "GST201", "MTH281", "PHY102"], clash: "", timetable: {
+    CIT237: ["2026-11-18", "11:00"], CIT215: ["2026-11-21", "08:30"], CIT211: ["2026-11-24", "14:00"],
+    CIT217: ["2026-11-25", "08:30"], CIT191: ["2026-11-26", "08:30"], GST203: ["2026-11-30", "08:30"],
+    GST201: ["2026-12-05", "08:30"], MTH281: ["2026-12-08", "11:00"], PHY102: ["2026-12-09", "11:00"]
   } }
 };
 // A link ending in ?u=samuel opens that profile and remembers it on this device.
@@ -346,7 +353,9 @@ var MATERIAL = {
   PHY108: { code: "PHY192", title: "Introductory Physics Practical II" },
   IFT191: { code: "IFT191" }, MTH102: { code: "MTH102" }, GST102: { code: "GST102" },
   COS102: { code: "CIT108", title: "Problem-Solving Algorithm" },
-  PHY107: { code: "PHY191", title: "Introductory Practical Physics I" }
+  PHY107: { code: "PHY191", title: "Introductory Practical Physics I" },
+  CIT237: { code: "CIT237" }, CIT215: { code: "CIT215" }, CIT211: { code: "CIT211" }, CIT217: { code: "CIT217" },
+  CIT191: { code: "CIT191" }, GST203: { code: "GST203" }, PHY102: { code: "PHY102" }
 };
 function materialHTML(code){
   var m = MATERIAL[code];
