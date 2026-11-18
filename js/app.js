@@ -199,7 +199,7 @@ var TITLES = { home: "Dashboard", exam: "Exam in progress", result: "Results", l
 function render(push){
   renderChip();
   syncHash(push);
-  document.title = (view.name === "course" ? view.code + " · " + BY[view.code].title : view.name === "read" ? view.code + " · " + TITLES.read : TITLES[view.name]) + " · NOUN Study Desk";
+  document.title = (view.name === "course" ? view.code + " · " + BY[view.code].title : view.name === "read" ? view.code + " · " + TITLES.read : TITLES[view.name]) + " · Study Desk (unofficial)";
   document.body.classList.toggle("exam-mode", view.name === "exam");
   var here = view.name === "library" || view.name === "read" ? "library" : view.name === "home" ? view.sec || "home" : "";
   $all("#nav a").forEach(function(a){ if (a.dataset.nav === here) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });

@@ -284,3 +284,7 @@ details > summary{cursor:pointer}
   .fc{height:300px}
   .fc-actions .btn{flex:1}
 }
+
+/* unofficial-site notice under the header */
+.unofficial{margin:0;padding:8px 16px;background:var(--mark);color:var(--mark-ink);font-size:13px;line-height:1.4;text-align:center;border-bottom:1px solid var(--line)}
+body.exam-mode .unofficial{display:none}
