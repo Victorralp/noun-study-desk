@@ -497,7 +497,7 @@ function startExam(codes, count, minutes, kind){
   if (count && count < items.length) items = items.slice(0, count);
   items.sort(function(a, b){ return (a.t === "fib") - (b.t === "fib"); });
   minutes = Math.max(1, Math.min(180, +minutes || 30));
-  X = { codes: codes, kind: kind, items: items, ans: items.map(function(){ return null; }), flag: items.map(function(){ return false; }), cur: 0, minutes: minutes, start: Date.now(), endAt: Date.now() + minutes * 60000, done: false };
+  X = { codes: codes, kind: kind, items: items, ans: items.map(function(){ return null; }), flag: items.map(function(){ return false; }), locked: items.map(function(){ return false; }), instant: S.instant !== false, cur: 0, minutes: minutes, start: Date.now(), endAt: Date.now() + minutes * 60000, done: false };
   go({ name: "exam" });
   startTimer();
 }
@@ -505,14 +505,24 @@ function startExam(codes, count, minutes, kind){
 function examHTML(){
   var it = X.items[X.cur], i = X.cur, answered = X.ans.filter(function(a){ return a !== null && a !== ""; }).length;
   var title = X.codes.length > 1 ? "Mixed mock · " + X.codes.length + " courses" : X.codes[0] + " · " + BY[X.codes[0]].title;
-  var h = '<div class="exam-bar"><strong>' + esc(title) + '</strong><span class="spacer"></span><span style="font-size:13px">Answered <span id="ansCount">' + answered + '</span>/' + X.items.length + '</span><span class="timer" id="timer" role="timer" aria-label="Time left">--:--</span><div class="bar"><i id="ansBar" style="width:' + pct(answered, X.items.length) + '%"></i></div></div>';
+  var h = '<div class="exam-bar"><strong>' + esc(title) + '</strong><span class="spacer"></span><button class="btn small" id="fbToggle" title="Show right/wrong as soon as you answer">Instant check: ' + (X.instant ? "on" : "off") + '</button><span style="font-size:13px">Answered <span id="ansCount">' + answered + '</span>/' + X.items.length + '</span><span class="timer" id="timer" role="timer" aria-label="Time left">--:--</span><div class="bar"><i id="ansBar" style="width:' + pct(answered, X.items.length) + '%"></i></div></div>';
   h += '<div class="exam"><div class="card">';
   h += '<div class="row" style="justify-content:space-between"><span class="qnum">QUESTION ' + (i + 1) + ' OF ' + X.items.length + ' · ' + (it.t === "mcq" ? "OBJECTIVE" : "FILL IN THE GAP") + (X.codes.length > 1 ? " · " + it.code : "") + (it.pq ? ' <span class="tag pq">PAST QUESTION</span>' : "") + '</span><button class="btn small" id="flagBtn">' + (X.flag[i] ? "Unflag" : "Flag for review") + '</button></div>';
   h += '<div class="qtext">' + esc(it.q) + '</div>';
+  var lock = X.instant && X.locked[i];
   if (it.t === "mcq"){
-    h += it.opts.map(function(o, k){ return '<button class="opt ' + (X.ans[i] === k ? "sel" : "") + '" data-opt="' + k + '"><span class="k">' + "ABCD"[k] + '</span><span>' + esc(o) + '</span></button>'; }).join("");
+    h += it.opts.map(function(o, k){
+      var cls = X.ans[i] === k ? "sel" : "";
+      if (lock) cls = k === it.ans ? "right" : X.ans[i] === k ? "wrong" : "dim";
+      return '<button class="opt ' + cls + '" data-opt="' + k + '"' + (lock ? ' aria-disabled="true"' : "") + '><span class="k">' + "ABCD"[k] + '</span><span>' + esc(o) + '</span></button>';
+    }).join("");
   } else {
-    h += '<div class="fib"><input type="text" id="fibIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type your answer" value="' + esc(X.ans[i] || "") + '" aria-label="Your answer"></div><p class="muted" style="font-size:13px">Type one word or short phrase. Check your spelling.</p>';
+    h += '<div class="fib"><input type="text" id="fibIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type your answer" value="' + esc(X.ans[i] || "") + '" aria-label="Your answer"' + (lock ? " readonly" : "") + '>' + (X.instant && !lock ? '<button class="btn primary" id="fibCheck">Check</button>' : "") + '</div><p class="muted" style="font-size:13px">Type one word or short phrase. Check your spelling.' + (X.instant && !lock ? " Press Enter to check." : "") + '</p>';
+  }
+  if (lock){
+    var ok = it.t === "mcq" ? X.ans[i] === it.ans : fibCorrect(X.ans[i], it.acc);
+    var right = it.t === "mcq" ? "ABCD"[it.ans] + ". " + it.opts[it.ans] : it.acc[0];
+    h += '<div class="fb ' + (ok ? "ok" : "no") + '" role="status"><b>' + (ok ? "Correct" : "Wrong") + '</b>' + (ok ? "" : ' · Answer: ' + esc(right)) + (it.exp ? '<div class="fb-exp">' + esc(it.exp) + '</div>' : "") + '</div>';
   }
   h += '<div class="q-actions"><button class="btn" id="prevQ" ' + (i ? "" : "disabled") + '>← Previous</button><button class="btn ' + (i === X.items.length - 1 ? "primary" : "") + '" id="nextQ">' + (i === X.items.length - 1 ? "Finish" : "Next →") + '</button></div>';
   h += '</div><div class="card q-side"><h3 style="margin-bottom:10px">Questions</h3><div class="nav-grid" id="navGrid">' + navButtons() + '</div>';
@@ -816,12 +826,23 @@ function bind(){
   }
 
   if (view.name === "exam"){
-    $all("[data-opt]").forEach(function(b){ b.onclick = function(){ X.ans[X.cur] = +b.dataset.opt; $all("[data-opt]").forEach(function(o){ o.classList.toggle("sel", o === b); }); refreshNav(); }; });
+    $all("[data-opt]").forEach(function(b){ b.onclick = function(){
+      if (X.instant && X.locked[X.cur]) return;
+      X.ans[X.cur] = +b.dataset.opt;
+      if (X.instant){ X.locked[X.cur] = true; render(); return; }
+      $all("[data-opt]").forEach(function(o){ o.classList.toggle("sel", o === b); }); refreshNav();
+    }; });
     var fi = $("#fibIn");
+    var checkFib = function(){
+      if (!X.instant || X.locked[X.cur] || !String(X.ans[X.cur] || "").trim()) return false;
+      X.locked[X.cur] = true; render(); return true;
+    };
     if (fi){
       fi.oninput = function(){ X.ans[X.cur] = fi.value; refreshNav(); };
-      fi.onkeydown = function(e){ if (e.key === "Enter"){ e.preventDefault(); next(); } };
+      fi.onkeydown = function(e){ if (e.key === "Enter"){ e.preventDefault(); if (!checkFib()) next(); } };
     }
+    if ($("#fibCheck")) $("#fibCheck").onclick = function(){ if (!checkFib()) fi.focus(); };
+    $("#fbToggle").onclick = function(){ X.instant = !X.instant; S.instant = X.instant; save(); render(); };
     $("#prevQ").onclick = function(){ jump(X.cur - 1); };
     $("#nextQ").onclick = next;
     $("#flagBtn").onclick = function(){ X.flag[X.cur] = !X.flag[X.cur]; this.textContent = X.flag[X.cur] ? "Unflag" : "Flag for review"; refreshNav(); };

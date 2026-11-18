@@ -288,3 +288,17 @@ details > summary{cursor:pointer}
 /* unofficial-site notice under the header */
 .unofficial{margin:0;padding:8px 16px;background:var(--mark);color:var(--mark-ink);font-size:13px;line-height:1.4;text-align:center;border-bottom:1px solid var(--line)}
 body.exam-mode .unofficial{display:none}
+.opt.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--surface))}
+.opt.right .k{background:var(--good);color:#fff;border-color:var(--good)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong .k{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt.dim{opacity:.55}
+.opt[aria-disabled=true]{cursor:default}
+.opt[aria-disabled=true]:hover{border-color:inherit}
+.opt.right[aria-disabled=true]:hover{border-color:var(--good)}
+.opt.wrong[aria-disabled=true]:hover{border-color:var(--bad)}
+.fib #fibCheck{margin-top:8px}
+.fb{margin-top:6px;padding:12px 14px;border-radius:var(--r);border:1.5px solid;font-size:15px}
+.fb.ok{border-color:var(--good);color:var(--good)}
+.fb.no{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
+.fb-exp{color:var(--ink);margin-top:6px;font-size:14px}
