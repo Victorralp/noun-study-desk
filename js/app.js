@@ -442,8 +442,8 @@ function officialHTML(c){
 
 function notesHTML(c){
   var off = officialHTML(c);
-  return (off ? '<div class="row" style="justify-content:flex-end;margin-bottom:10px"><button class="btn small" id="offAll">Open all units</button></div><div class="official">' + off + '</div><h2 style="margin:28px 0 12px">Quick points</h2>' : "") +
-    '<div class="notes grid">' + c.modules.map(function(m, i){
+  return (off ? '<div class="row" style="justify-content:flex-end;margin-bottom:10px"><button class="btn small" id="offAll">Open all units</button></div><div class="official">' + off + '</div><h2 style="margin:28px 0 12px">Key points</h2>' : "") +
+    '<div class="notes grid">' + ((window.SUMMARY || {})[c.code] || c.modules).map(function(m, i){
     return '<div class="card mod" id="mod-' + i + '"><div class="qnum">MODULE ' + (i + 1) + '</div><h3>' + esc(m[0]) + '</h3><ul>' + m[1].map(function(p){ return '<li>' + esc(p) + '</li>'; }).join("") + '</ul></div>';
   }).join("") + '</div><div class="row" style="margin-top:16px"><button class="btn" data-ctab="cards">Flashcards</button><button class="btn primary" data-ctab="practice">Test yourself</button></div>';
 }
