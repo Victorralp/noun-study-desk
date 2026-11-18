@@ -56,6 +56,7 @@ var S = Object.assign({ attempts: [], known: {}, dates: {}, theme: null }, load(
 var TIMETABLE = ME.timetable;
 Object.keys(TIMETABLE).forEach(function(k){ if (!S.dates[k] || !S.dates[k].date) S.dates[k] = { date: TIMETABLE[k][0], time: TIMETABLE[k][1] }; });
 var GUIDES = window.GUIDES || {};
+var EXP = window.EXPLAIN || {};
 
 /* ---------- helpers ---------- */
 var $ = function(s, r){ return (r || document).querySelector(s); };
@@ -489,9 +490,9 @@ function startExam(codes, count, minutes, kind){
     if (kind !== "fib") c.mcq.forEach(function(m){
       if (!keep(!!m[5])) return;
       var order = shuffle(m[2].map(function(_, i){ return i; }));
-      items.push({ t: "mcq", code: code, mod: m[0], q: m[1], opts: order.map(function(i){ return m[2][i]; }), ans: order.indexOf(m[3]), exp: m[4] || "", pq: !!m[5] });
+      items.push({ t: "mcq", code: code, mod: m[0], q: m[1], opts: order.map(function(i){ return m[2][i]; }), ans: order.indexOf(m[3]), exp: m[4] || EXP[m[1]] || "", pq: !!m[5] });
     });
-    if (kind !== "mcq") c.fib.forEach(function(f){ if (keep(!!f[4])) items.push({ t: "fib", code: code, mod: f[0], q: f[1], acc: f[2], exp: f[3] || "", pq: !!f[4] }); });
+    if (kind !== "mcq") c.fib.forEach(function(f){ if (keep(!!f[4])) items.push({ t: "fib", code: code, mod: f[0], q: f[1], acc: f[2], exp: f[3] || EXP[f[1]] || "", pq: !!f[4] }); });
   });
   items = shuffle(items);
   if (count && count < items.length) items = items.slice(0, count);
