@@ -12,11 +12,11 @@ var BY = {}, STUB = {}; ALL.forEach(function(c){ BY[c.code] = c; if (c.stub) STU
 
 /* ---------- profiles: each student has their own courses, timetable and saved progress ---------- */
 var KEY = "noun-study-desk-v1", WHO_KEY = "noun-study-desk-profile";
-// 2026_2 e-exam draft timetables. They fill only dates the student has not set themselves.
+// 2026_2 e-exam final timetables. They fill only dates the student has not set themselves.
 var PROFILES = {
-  victor: { name: "Victor", courses: ["COS201", "GST201", "IFT203", "IFT205", "IFT211", "IFT213", "INS207", "PHY108", "CYB111", "IFT299"], clash: "INS207 and CYB111 clash (Thu 19 Nov, 11am): report it to your study centre. ", timetable: {
+  victor: { name: "Victor", courses: ["COS201", "GST201", "IFT203", "IFT205", "IFT211", "IFT213", "INS207", "PHY108", "CYB111", "IFT299"], clash: "INS207 and CYB111 clash (Thu 19 Nov, 11am): report it to your study centre. GST201 is missing from your personal timetable: Batch A is Sat 21 Nov 11am, Batch B is Sat 5 Dec 8:30am, so confirm your batch. IFT205: personal timetable says 2pm, master PDF Friday column says 3pm, so be there by 2pm. ", timetable: {
     COS201: ["2026-11-18", "11:00"], INS207: ["2026-11-19", "11:00"], CYB111: ["2026-11-19", "11:00"],
-    IFT211: ["2026-11-19", "14:00"], IFT205: ["2026-11-20", "15:00"], GST201: ["2026-11-21", "11:00"],
+    IFT211: ["2026-11-19", "14:00"], IFT205: ["2026-11-20", "14:00"], GST201: ["2026-11-21", "11:00"],
     IFT213: ["2026-11-23", "11:00"], IFT203: ["2026-11-24", "08:30"], PHY108: ["2026-11-26", "11:00"]
   } },
   samuel: { name: "Samuel", courses: ["COS102", "COS201", "IFT211", "IFT205", "IFT203", "IFT191", "PHY108", "PHY107", "GST201", "MTH102", "GST102"], clash: "GST201 and MTH102 clash (Sat 5 Dec, 8:30am): report it to your study centre. ", timetable: {
@@ -276,7 +276,7 @@ function homeHTML(){
 
   h += '<section><h2>Weak topics</h2>' + weakHTML() + '</section>';
 
-  h += '<section id="timetable"><h2>Exam timetable</h2><div class="card"><p class="muted" style="margin-top:0;font-size:14px">Pre-filled from the 2026_2 e-exam draft timetable. ' + esc(ME.clash) + 'Edit any date if the final timetable changes. Saved in this browser only.</p><div class="scroll-x"><table class="tt"><thead><tr><th>Course</th><th>Date</th><th>Time</th><th>Countdown</th></tr></thead><tbody>';
+  h += '<section id="timetable"><h2>Exam timetable</h2><div class="card"><p class="muted" style="margin-top:0;font-size:14px">Pre-filled from the 2026_2 e-exam final timetable. ' + esc(ME.clash) + 'Edit any date if the final timetable changes. Saved in this browser only.</p><div class="scroll-x"><table class="tt"><thead><tr><th>Course</th><th>Date</th><th>Time</th><th>Countdown</th></tr></thead><tbody>';
   COURSES.slice().sort(function(a, b){ return (examTs(a.code) || 9e15) - (examTs(b.code) || 9e15); }).forEach(function(c){
     var d = S.dates[c.code] || {}, t = examTs(c.code), cd = "–", cc = "";
     if (t){ var dd = Math.ceil((t - Date.now()) / 86400000); cd = dd < 0 ? "done" : dd === 0 ? "today" : dd + " d"; cc = dd < 0 ? " done" : dd <= 7 ? " hot" : ""; }
