@@ -5,6 +5,55 @@ INS207 (Introduction to Information Systems / Management Information Systems) ex
 
 > **Exam tip:** Match each system type to its **management level** and **decision type**. TPS → operational/structured; MIS → middle/semi-structured reports; DSS → middle/semi-structured analysis; ESS → strategic/unstructured.
 
+## Exam-day cram: clue word → answer
+If a question is hard to read, look for the **clue word**. The clue points to the answer.
+
+| If the question says… | Answer |
+|---|---|
+| day-to-day, records transactions, sales, payroll, till, POS | **TPS** |
+| routine or summary reports, middle managers | **MIS** |
+| what-if, models, semi-structured | **DSS** |
+| senior or top executives, strategic, dashboard, 5-year plan | **ESS / EIS** |
+| mimics a human expert, reasoning, diagnosis | **Expert system** |
+| word processing, email, calendar | **Office automation (OAS)** |
+| joins finance, HR, production and sales in one database | **ERP** |
+| customers, customer interactions | **CRM** |
+| suppliers → factory → customers | **SCM** |
+
+> **Ladder:** TPS → MIS → DSS → ESS. Bottom (operations) to top (bosses). Each one feeds the next.
+
+### Data basics
+- **Data** = raw facts. Processed data = **information**.
+- Hierarchy, smallest to largest: **bit → byte → field → record → file → database**. Field = one fact (Name). Record = one row (one student).
+- **Primary key** = unique (matric number). **Foreign key** = points to another table's primary key (CourseID in Enrolment → Course).
+- **DBMS** = software that manages a database. **SQL** = the language used to query it.
+
+### SQL command groups
+| Group | Commands | What it changes |
+|---|---|---|
+| **DDL** | CREATE, ALTER, DROP | Structure (tables) |
+| **DML** | SELECT, INSERT, UPDATE, DELETE | Data (rows) |
+| **DCL** | GRANT, REVOKE | Permissions (who can see what) |
+
+### SDLC
+- Order: Planning → **Analysis** (study current system, gather requirements) → Design → Implementation → **Maintenance** (last and longest).
+- Feasibility: **Economic** = cost vs benefit. **Technical** = can we build it? **Operational** = will people use it?
+- **Waterfall** = finish each phase before the next. **Prototype** = quick working model to show users.
+
+| Changeover | Clue |
+|---|---|
+| **Parallel** | old and new run together, safest |
+| **Pilot** | one department or branch first |
+| **Phased** | module by module |
+| **Direct** | switch overnight, riskiest |
+
+### Business and security
+- **Michael Porter** → five competitive forces, and the value chain (primary + support activities).
+- **B2C** = business to you (Jumia). **C2C** = people to people (Jiji). **B2B** = business to business.
+- Good information: **timely, accurate, relevant, complete**.
+- IS components: hardware, software, data, people, procedures.
+- **CIA triad**: Confidentiality, Integrity, Availability.
+
 ## 1. Information systems concepts
 ### Data, information, knowledge
 - **Data**: raw facts (numbers, text, images) with no context. Example: 4500, 12, "Lagos".
