@@ -47,6 +47,7 @@ Object.keys(PQ).forEach(function(k){ var c = BY[k], p = PQ[k]; if (!c) return;
   p.cards.forEach(function(x){ c.cards.push([x[0], x[1] + "  (past question)"]); });
 });
 function pqCount(c){ return c.mcq.filter(function(m){ return m[5]; }).length + c.fib.filter(function(f){ return f[4]; }).length; }
+var OPEN = ["CIT104", "ENG121"];
 var CBT_CODES = COURSES.filter(function(c){ return c.code !== "IFT299" && !c.stub; }).map(function(c){ return c.code; });
 
 /* ---------- storage (per-browser, per-profile, guarded) ---------- */
@@ -274,6 +275,20 @@ function homeHTML(){
     h += '</div></div>';
   });
   h += '</div></section>';
+
+  // Courses open to every visitor, whichever profile is picked (no profile needed).
+  var open = OPEN.filter(function(k){ return BY[k] && COURSES.indexOf(BY[k]) < 0; });
+  if (open.length){
+    h += '<section><h2>Open to everyone</h2><p class="muted" style="margin-top:-6px;font-size:14px">No profile needed. Each test has 50 questions from past papers and the course material.</p><div class="grid g-courses">';
+    open.forEach(function(k){
+      var c = BY[k], b = bestScore(k), n = c.mcq.length + c.fib.length;
+      h += '<div class="card course"><div class="row" style="justify-content:space-between"><span class="code">' + c.code + '</span><span class="tag">' + pqCount(c) + ' past questions</span></div>';
+      h += '<div class="title"><button class="link-btn" data-course="' + c.code + '" data-tab="notes">' + esc(c.title) + '</button></div>';
+      h += '<div style="font-size:13px" class="muted">' + n + ' questions · Best test: ' + (b === null ? "not yet" : b + "%") + '</div><div class="bar"><i style="width:' + (b || 0) + '%"></i></div>';
+      h += '<div class="foot"><button class="btn small" data-course="' + c.code + '" data-tab="notes">Summary</button><button class="btn small" data-course="' + c.code + '" data-tab="cards">Flashcards</button><button class="btn small" data-read="' + c.code + '">Material</button><button class="btn small primary" data-open-test="' + c.code + '">Take 50-question test</button></div></div>';
+    });
+    h += '</div></section>';
+  }
 
   h += '<section><h2>Weak topics</h2>' + weakHTML() + '</section>';
 
@@ -711,6 +726,7 @@ function reviseBtn(code, mod, cls, label){
 function bindReadTest(root){
   Array.prototype.forEach.call(root.querySelectorAll("[data-read]"), function(b){ b.onclick = function(){ go({ name: "read", code: b.dataset.read, file: 0 }); }; });
   Array.prototype.forEach.call(root.querySelectorAll("[data-test]"), function(b){ b.onclick = function(){ takeTest(b.dataset.test); }; });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-test]"), function(b){ b.onclick = function(){ var c = BY[b.dataset.openTest], n = Math.min(50, c.mcq.length + c.fib.length); startExam([c.code], n, Math.round(n * 0.75), "mix"); }; });
 }
 // Phones and tablets often will not show a PDF inside a page, so they start on Google's viewer.
 var touchy = !!(window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
