@@ -1,5 +1,5 @@
 // Offline support: cache the site's own files, refresh them in the background.
-var CACHE = "study-desk-v24";
+var CACHE = "study-desk-v25";
 var FILES = ["./", "index.html", "css/styles.css", "js/data.js", "js/past-questions.js", "js/explain.js", "js/summaries.js", "js/official.js", "js/app.js", "js/guides/COS201.js", "js/guides/GST201.js", "js/guides/IFT203.js", "js/guides/IFT205.js", "js/guides/IFT211.js", "js/guides/IFT213.js", "js/guides/INS207.js", "js/guides/PHY108.js", "js/guides/CYB111.js", "js/packs/COS102.js", "js/packs/IFT191.js", "js/packs/PHY107.js", "js/packs/MTH102.js", "js/packs/GST102.js", "js/packs/CIT191.js", "js/packs/CIT237.js", "js/packs/CIT215.js", "js/packs/CIT211.js", "js/packs/CIT217.js", "js/packs/GST203.js", "js/packs/MTH281.js", "js/packs/PHY102.js", "js/library.js", "icons/icon.svg", "manifest.webmanifest"];
 
 self.addEventListener("install", function(e){
@@ -21,8 +21,19 @@ self.addEventListener("fetch", function(e){
       var net = fetch(req, { cache: "no-cache" }).then(function(res){
         if (res && (res.ok || res.type === "opaque")) cache.put(req, res.clone());
         return res;
-      }).catch(function(){ return hit || (req.mode === "navigate" ? cache.match("index.html") : undefined); });
-      return hit || net;
+      });
+      var offline = function(){ return hit || (req.mode === "navigate" ? cache.match("index.html") : undefined); };
+      // Fonts never change: serve them from the cache first.
+      if (fonts) return hit || net.catch(offline);
+      // Site files: get the newest copy so updates show at once. Fall back to the
+      // saved copy when offline, or when the network takes more than 4 seconds.
+      if (!hit) return net.catch(offline);
+      return new Promise(function(resolve){
+        var done = false;
+        var t = setTimeout(function(){ if (!done){ done = true; resolve(hit); } }, 4000);
+        net.then(function(res){ if (!done){ done = true; clearTimeout(t); resolve(res && res.ok ? res : hit); } })
+           .catch(function(){ if (!done){ done = true; clearTimeout(t); resolve(hit); } });
+      });
     });
   }));
 });
