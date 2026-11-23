@@ -300,6 +300,104 @@ Features of authoring tools: editing features, organising features (flowcharts, 
 - Requirements: high bandwidth, low **latency** (delay), low **jitter** (variation in delay), synchronisation of audio and video (lip-sync). **QoS (Quality of Service)** manages these.
 - Protocols: RTP/RTCP (real-time transport), RTSP (streaming control), HTTP-based HLS and MPEG-DASH (adaptive bitrate streaming), SIP and H.323 (VoIP/video conferencing).
 
+## 9. Multimedia access systems (Module 5)
+This section follows Module 5 of the new IFT213 course text: Internet telephony, APIs for multimedia communication, fibre optics and DSL, and digital/cable television.
+
+> **Exam tip:** Module 5 questions are mostly definitions, lists of advantages and disadvantages, and the DSL table. Learn the DSL table row by row.
+
+### Internet telephony
+- **Internet telephony**: voice, fax, SMS and voice-messaging carried over the **Internet** instead of the **PSTN** (public switched telephone network).
+- **Steps to make a VoIP call**: (1) signalling and media channel setup, (2) digitise the analogue voice, (3) encode, (4) packetise, (5) send as **IP packets** over a packet-switched network.
+- **At the receiver** the steps run in reverse: receive the IP packets, decode them, then **digital-to-analogue conversion** gives back the voice.
+- **How it starts**: you speak into a microphone → the **sound card** turns the analogue wave into digital data → the telephony software compresses it. Voice is normally **64 Kbps PCM** or **32 Kbps ADPCM** before compression.
+- **Two transport protocols**: **TCP** carries addressing/directory information. **UDP** carries the actual voice packets.
+
+### Super nodes
+A **super node** is a Skype computer that helps other users connect when **firewalls** stop a direct connection. It works anonymously and securely, forwarding requests on behalf of ordinary nodes. The users don't know it is helping.
+
+### VoIP vs Internet telephony (as the course text puts it)
+| VoIP | Internet telephony |
+|---|---|
+| Phone calls over an **enterprise network** | Communication over the **Internet** |
+| Users call with **IP phones** | Users call with PC software (e.g. Skype) |
+| **Full-duplex**: both parties talk at the same time | The text says **only one person can speak at a time** |
+
+A conventional telephone is also **full-duplex**.
+
+### Advantages and disadvantages of Internet telephony
+| Advantages | Disadvantages |
+|---|---|
+| The ITSP uses one infrastructure for Internet access and telephony | You need a PC and a broadband connection |
+| Better bandwidth utilisation | For a free call, both users need similar software |
+| Free calls between users of the same software | Callers can't keep track of call costs |
+| Voicemail when busy or offline; easy to use | Poor call reception when other programs are running |
+| Cheap international calls; Skype is freeware, ad-free, no spyware | |
+
+### APIs for multimedia communication
+- **API (Application Programming Interface)**: a set of rules and protocols that lets software applications talk to each other. Developers use APIs to add calls, video, chat or streaming **without building them from scratch**.
+- **Examples**: **WebRTC** (open-source, real-time communication in browsers), **Twilio** (commercial SMS, voice and video), **Agora** (audio/video SDK for mobile and web), **Zoom SDK** (adds conferencing to other apps), **Vonage** (voice and messaging).
+- **Roles of APIs**: real-time communication; media capture and encoding; network management and latency control; security and privacy; device and platform compatibility.
+
+| Benefits | Challenges |
+|---|---|
+| Faster development time | Third-party dependency |
+| Cross-platform compatibility | Cost and pricing models |
+| Scalability and reliability | Network variability |
+| High-quality audio and video | Security and compliance risks (GDPR, HIPAA) |
+| Built-in security (end-to-end encryption, token authentication) | Integration complexity |
+| Cost efficiency | Limited customisation |
+| Regular updates and support | Versioning and updates breaking apps |
+| Analytics and monitoring tools | Scalability problems in edge cases |
+
+### Fibre optics
+- **Fibre optics** sends data as **pulses of light** through glass or plastic fibres as thin as a human hair.
+- **Parts**: **core** (where light travels), **cladding** (reflects light back into the core), **buffer coating** (protects from moisture and damage).
+- **Working principle**: **total internal reflection**. Light hitting the cladding at the right angle bounces back into the core, even when the cable bends.
+- **History**: 1840s light through glass shown; 1960s developed for communication; 1970s **Corning Inc.** made low-loss fibre; 1980s onward it replaced copper.
+
+| Single-mode fibre (SMF) | Multi-mode fibre (MMF) |
+|---|---|
+| Small core, about **9 microns** | Larger core, **50 or 62.5 microns** |
+| Infrared **laser** light (1310 or 1550 nm) | Light from **LEDs** |
+| Long distance, **100 km or more** | Short distance, **up to 2 km** |
+| Internet backbones, WANs | LANs, data centres |
+
+**Advantages**: high speed (terabits per second), large bandwidth, long distance without repeaters, immune to electromagnetic interference, hard to tap (secure), light and thin.
+**Applications**: Internet backbone, medical imaging (endoscopy), military and aerospace, broadcasting, industrial automation, education and research.
+
+### 4G/5G and wireless broadband
+- **4G and 5G** are generations of mobile broadband through **cell towers**. **5G** adds higher speed, ultra-low latency and massive connectivity for **IoT** and smart cities.
+- **Wireless broadband** uses radio signals (Wi-Fi, fixed wireless) for last-mile access where cables are impractical.
+
+### Digital Subscriber Line (DSL)
+**DSL** is high-speed, digital, always-on Internet over **ordinary telephone lines**. It can carry voice and data at the same time.
+- **ADSL (Asymmetric)**: download is faster than upload. Good for homes, **not for businesses** that send a lot of data both ways.
+- **HDSL (High bit rate)**: an alternative to the **T-1 line (1.544 Mbps)**. T-1 uses **AMI** coding and needs repeaters beyond about 1 km. HDSL uses **2B1Q**, reaches 1.544–2 Mbps up to **12,000 ft (3.86 km)** without repeaters, and uses **two twisted pairs** (one per direction).
+- **SDSL (Symmetric)**: the **one-pair version of HDSL**; **768 kbps** each way.
+- **VDSL (Very high bit rate)**: short distances over coaxial, fibre or twisted pair; uses **DMT**.
+
+| Technology | Downstream | Upstream | Distance (ft) | Pairs | Line code |
+|---|---|---|---|---|---|
+| ADSL | 1.5–6.1 Mbps | 16–640 kbps | 12,000 | 1 | DMT |
+| ADSL Lite | 1.5 Mbps | 500 kbps | 18,000 | 1 | DMT |
+| HDSL | 1.5–2.0 Mbps | 1.5–2.0 Mbps | 12,000 | 2 | 2B1Q |
+| SDSL | 768 kbps | 768 kbps | 12,000 | 1 | 2B1Q |
+| VDSL | 25–55 Mbps | 3.2 Mbps | 3,000–10,000 | 1 | DMT |
+
+> **Watch out:** the paragraph on VDSL in the course text swaps the numbers. Go by the table: 25–55 Mbps is the **downstream** rate.
+
+- **DSLAM (Digital Subscriber Line Access Multiplexer)**: equipment at the telephone exchange that collects many customers' DSL lines and joins them onto one high-speed link to the Internet. (The text asks about it but doesn't explain it.)
+
+### Digital television
+- **Digital TV (DTV)**: audio and video sent as **digital signals** instead of analogue ones. Picture formats fall into **HDTV** and **SDTV**.
+- **Advantages over analogue**: digital channels use **less bandwidth**, so more channels fit in the same space; HD service; multimedia and interactivity; **multiplexing** (more than one programme on one channel); **electronic programme guides**; extra languages or subtitles.
+- **Interference**: analogue TV suffers **ghosting** and **noise** but stays watchable. Digital reception must be nearly complete, otherwise neither sound nor picture works.
+
+### Cable television
+- **Cable TV**: TV delivered by radio-frequency signals over **coaxial cable**, or by light pulses over **optical fibre**, to the subscriber's home.
+- **CATV** originally meant **Community Antenna Television** (from **1948**). Big community antennas were built where reception was poor, and cable was run to homes. Radio was sent by cable in some European cities as early as **1924**.
+- Coaxial cable carries signals **both ways**. Spare bandwidth gives **cable Internet** and **cable telephony**. **Cable modems** turn network data into signals that can travel over coax.
+
 ## Quick revision checklist
 - Define multimedia, hypermedia, interactive multimedia; linear vs non-linear; static vs dynamic media.
 - Serif vs sans-serif; font vs typeface; 72 pt = 1 inch; TrueType/PostScript/OpenType; anti-aliasing.
@@ -311,4 +409,9 @@ Features of authoring tools: editing features, organising features (flowcharts, 
 - Lossless (RLE, Huffman, LZW; ZIP, PNG, GIF, FLAC) vs lossy (DCT; JPEG, MP3, MPEG); compression ratio; RLE and Huffman examples.
 - JPEG steps; MPEG-1/2/4; I, P, B frames; spatial vs temporal compression.
 - Authoring tool types (card, icon, time, script); production stages; alpha vs beta testing; storyboard; team roles.
+- Module 5: Internet telephony vs PSTN; VoIP call steps; TCP (addressing) vs UDP (voice); super nodes; pros and cons of Internet telephony.
+- APIs: WebRTC, Twilio, Agora, Zoom SDK, Vonage; their roles, benefits and challenges.
+- Fibre: core, cladding, buffer; total internal reflection; single-mode vs multi-mode; advantages. 5G = speed, low latency, IoT.
+- DSL table (ADSL, ADSL Lite, HDSL, SDSL, VDSL); T-1 = 1.544 Mbps; 2B1Q vs DMT; DSLAM.
+- Digital TV advantages (bandwidth, multiplexing, EPG); cable TV, CATV = Community Antenna Television (1948).
 `;

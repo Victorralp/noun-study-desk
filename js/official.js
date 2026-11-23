@@ -700,6 +700,55 @@ window.OFFICIAL = {
 ],
 "IFT213": [
 {
+"src": "IFT213 Introduction to Multimedia Technology, Module 5: Multimedia Access Systems (NOUN course text)",
+"units": [
+{
+"t": "Internet Telephony",
+"s": "Internet Telephony refers to communications services—voice, fax, SMS, and/or voice-messaging applications—that are transported via the Internet, rather than the public switched telephone network (PSTN). VoIP is a full-duplex (two-way) system where both parties can talk at the same time. A conventional telephone system is full-duplex. In Internet telephony, only one person can speak at a time.",
+"c": "In this unit, you have learnt about the concept of Internet Telephony and its features. You have also learnt about the relationship between VoIP and Internet Telephony.",
+"d": [
+"There are two primary transport protocols used for an internet telephony session. Transmission control Protocol (TCP) is used to transport addressing or directory information while User datagram protocol (UDP) is used for the actual transfer of voiced-digitized packets.",
+"A super node assists other users in communicating or using Skype software efficiently.",
+"VoIP refers to making phone calls over an enterprise network. In VoIP, users place calls using IP phones."
+]
+},
+{
+"t": "APIs for Multimedia Communication",
+"s": "Multimedia Communication APIs are specialized interfaces that allow developers to embed real-time communication features—such as video calls, voice chats, live streaming, and messaging—into applications with ease. These APIs handle complex processes like media capture, encoding, network transmission, and playback, making it possible to create interactive, cross-platform experiences without building everything from scratch. Popular APIs like WebRTC, Twilio, Agora, and Zoom SDK provide tools for scalable and secure communication, widely used in education, healthcare, social platforms, and business collaboration. While they offer major benefits like faster development, flexibility, and improved user experience, they also present challenges such as third-party reliance, cost management, and data privacy concerns.",
+"c": "In conclusion, multimedia communication APIs have become essential tools in modern application development, enabling seamless integration of real-time audio, video, messaging, and interactive features across platforms. However, developers must also be mindful of potential challenges such as third-party dependency, cost, and security considerations.",
+"d": [
+"An API (Application Programming Interface) is a set of defined rules and protocols that allows different software applications to communicate and interact with each other.",
+"WebRTC – Open-source protocol for real-time communication in browsers.",
+"Twilio – Commercial API for SMS, voice, and video.",
+"Agora – Scalable audio/video SDK for mobile and web apps.",
+"Zoom SDK – Adds conferencing features to third-party applications.",
+"Vonage API – Used for voice and messaging apps."
+]
+},
+{
+"t": "Fibre Optics, 4G/5G Networks, Wireless Broadband and DSL",
+"s": "In summary, this unit looked at the basic information about the Digital Subscriber Line. We also considered the different forms of DSL.",
+"c": "Digital subscriber line is a high speed, digital, always on the internet access technology that runs over standard phone lines. It is one of the fastest internet connections that is affordable to individuals. A Digital Subscriber Line (DSL) connection can simultaneously carry voice and data, if permitted by the DSL provider.",
+"d": [
+"Fibre optics is a communication technology that transmits data as light pulses through strands of glass or plastic fibers.",
+"Fibre optics works on the principle of total internal reflection.",
+"ADSL, like a 56K modem, provides higher speed (bit rate) in the downstream direction (from the Internet to the resident) than in the upstream direction (from the resident to the Internet).",
+"The high-bit-rate digital subscriber line (HDSL) was designed as an alternative to the T-1 line (1.544 Mbps).",
+"The symmetric digital subscriber line (SDSL) is a one twisted-pair version of HDSL."
+]
+},
+{
+"t": "Digital Television / Cable Television",
+"s": "In summary, we learnt about the different access networks to Information. Some of these examples are the Cable Television and the digital Television.",
+"c": "In conclusion, we looked into the features of the Cable Television as a system of providing television to consumers via radio frequency signals transmitted to televisions through coaxial cables or Digital light pulses though fixed optical fibres located on the subscriber's property while the Digital Television is the transmission of audio and video by digital signals.",
+"d": [
+"Digital television (DTV) is the transmission of audio and video by digital signals, in contrast to the analogue signals used by analogue TV.",
+"The abbreviation CATV is often used to mean \"Cable TV\". It originally stood for Community Antenna Television."
+]
+}
+]
+},
+{
 "src": "CIT463 Introduction to Multimedia Technology (older NOUN text on the same subject)",
 "units": [
 {
