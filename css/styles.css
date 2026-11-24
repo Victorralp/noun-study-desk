@@ -314,3 +314,8 @@ body.exam-mode .unofficial{display:none}
 .tip{font-size:14px;margin:14px 2px}
 .g-courses .foot .btn:not(.small){flex:1 1 140px;min-height:46px;font-size:15.5px}
 .opt,.rv,.q-text{overflow-wrap:anywhere}
+.common{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px;font-size:14px}
+.common .muted{flex-basis:100%}
+.chip-btn{border:1.5px solid var(--accent);background:var(--surface);color:var(--accent);border-radius:999px;padding:8px 14px;font:600 14px/1 "JetBrains Mono",monospace;cursor:pointer;min-height:38px}
+.chip-btn:hover{background:var(--accent-soft)}
+.btn.wa{background:#1fa855;border-color:#1fa855;color:#fff;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}

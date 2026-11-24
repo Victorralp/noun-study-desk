@@ -49,7 +49,9 @@ Object.keys(PQ).forEach(function(k){ var c = BY[k], p = PQ[k]; if (!c) return;
   p.cards.forEach(function(x){ c.cards.push([x[0], x[1] + "  (past question)"]); });
 });
 function pqCount(c){ return c.mcq.filter(function(m){ return m[5]; }).length + c.fib.filter(function(f){ return f[4]; }).length; }
-var OPEN = ["CIT104", "ENG121"];
+var OPEN = ["CIT104", "ENG121", "GST101", "GST104", "GST105", "GST202", "GST204", "GST301", "GST302"];
+// Courses every NOUN student takes: one-tap shortcuts on the home page.
+var COMMON = ["GST101", "GST102", "GST104", "GST105", "GST201", "GST202", "GST203", "GST204", "GST301", "GST302"];
 var CBT_CODES = COURSES.filter(function(c){ return c.code !== "IFT299" && !c.stub; }).map(function(c){ return c.code; });
 
 /* ---------- storage (per-browser, per-profile, guarded) ---------- */
@@ -229,6 +231,7 @@ function guestHTML(){
   var h = '<div class="card welcome"><h1>Practise for your NOUN exam</h1><p>Free. No sign-up. Works for every NOUN course.</p>';
   h += '<ol class="steps"><li><b>Type your course code</b> in the box below, for example <span class="mono">GST101</span>.</li><li>Tap <b>Start test</b>. You get up to 50 questions, timed like the real e-exam.</li><li>At the end you see your score and the <b>right answer</b> to every question.</li></ol>';
   h += '<label class="f big-search"><span>Your course code</span><input type="search" id="gQ" autocomplete="off" autocapitalize="characters" enterkeyhint="search" placeholder="e.g. GST101 or accounting"></label>';
+  h += '<div class="common"><span class="muted">Courses every student takes:</span>' + COMMON.filter(function(k){ return BY[k]; }).map(function(k){ return '<button class="chip-btn" data-pick="' + k + '">' + k + '</button>'; }).join("") + '</div>';
   h += '<div id="gOut"></div></div>';
   if (S.mine.length){
     h += '<section><h2>My courses</h2><div class="grid g-courses">';
@@ -237,9 +240,12 @@ function guestHTML(){
   } else h += '<p class="muted tip">Tip: tap <b>☆ Save</b> on a course and it stays on this page next time you visit.</p>';
   if (S.attempts.length) h += '<section><h2>My recent tests</h2>' + historyHTML(S.attempts.slice(-8).reverse()) + '</section>';
   h += '<section><details class="card small"><summary><b>Questions people ask</b></summary><p class="muted"><b>Do I need to log in?</b> No. Nothing you type leaves your phone. Your scores are kept on this phone only.</p><p class="muted"><b>Where do the questions come from?</b> From the official NOUN course material for each course. Always check with your own course material.</p><p class="muted"><b>Can I use it without data?</b> After your first visit, pages you opened also work offline.</p><p class="muted" style="margin-bottom:0"><b>Is this NOUN\'s website?</b> No. It is a free, unofficial study site made by students.</p></details></section>';
+  h += '<div class="card share-site"><b>Know someone writing NOUN exams?</b><p class="muted" style="margin:4px 0 10px">Send them the site. It is free for everyone.</p>' + waBtn("Free practice tests for every NOUN course. Type your course code and start: " + SITE_URL, "Share on WhatsApp") + '</div>';
   h += whoHTML();
   return h;
 }
+var SITE_URL = "https://victorralp.github.io/noun-study-desk/";
+function waBtn(text, label){ return '<a class="btn wa" href="https://wa.me/?text=' + encodeURIComponent(text) + '" target="_blank" rel="noopener">' + esc(label) + '</a>'; }
 function guestCard(code, title, mine){
   var b = bestScore(code), t = hasTest(code);
   var h = '<div class="card course"><div class="row" style="justify-content:space-between"><span class="code">' + esc(code) + '</span><button class="btn small ghost" data-save="' + esc(code) + '" data-title="' + esc(title) + '">' + (isMine(code) ? "★ Saved" : "☆ Save") + '</button></div>';
@@ -247,6 +253,7 @@ function guestCard(code, title, mine){
   if (mine && t) h += '<div style="font-size:13px" class="muted">Best score: ' + (b === null ? "no test yet" : b + "%") + '</div><div class="bar"><i style="width:' + (b || 0) + '%"></i></div>';
   h += '<div class="foot">';
   if (t) h += '<button class="btn primary" data-test="' + esc(code) + '">Start test</button>';
+  if (BY[code] && !BY[code].gen && !BY[code].stub) h += '<button class="btn" data-course="' + esc(code) + '" data-tab="' + defaultTab(code) + '">Notes &amp; flashcards</button>';
   else h += '<span class="tag">No test for this course yet</span>';
   if (window.LIB && libHasCw(code)) h += '<button class="btn" data-read="' + esc(code) + '">Read course material</button>';
   return h + '</div></div>';
@@ -267,6 +274,7 @@ function guestFill(){
 }
 function bindGuest(root){
   bindReadTest(root);
+  Array.prototype.forEach.call(root.querySelectorAll("[data-course]"), function(b){ b.onclick = function(){ fc = null; go({ name: "course", code: b.dataset.course, tab: b.dataset.tab || "notes" }); }; });
   Array.prototype.forEach.call(root.querySelectorAll("[data-save]"), function(b){ b.onclick = function(){
     var code = b.dataset.save;
     if (isMine(code)){ S.mine = S.mine.filter(function(m){ return m[0] !== code; }); toast(code + " removed from My courses"); }
@@ -671,6 +679,8 @@ function resultHTML(){
   if (X.timeUp) h += '<div class="notice" style="margin-top:14px">Time up. Your test was submitted automatically.</div>';
   h += '<div class="card" style="margin-top:14px"><div class="score-ring"><div class="grade ' + (g === "F" ? "f" : "") + '">' + g + '</div><div><div class="big">' + a.pct + '%</div><div class="muted">' + a.correct + ' of ' + a.total + ' correct · ' + Math.floor(a.used / 60) + 'm ' + (a.used % 60) + 's used</div></div><span class="spacer"></span><div class="row"><button class="btn" id="retry">Retake</button>' + (X.codes.length === 1 ? reviseBtn(X.codes[0], null, "btn primary", "Revise " + X.codes[0]) : "") + '</div></div></div>';
 
+  var what = X.codes.length === 1 ? X.codes[0] : "a NOUN mock exam";
+  h += '<div class="card share-site" style="margin-top:14px"><b>Share your score</b><p class="muted" style="margin:4px 0 10px">Help your coursemates practise too.</p>' + waBtn("I scored " + a.pct + "% on " + what + " practice on Study Desk. Practise free here: " + SITE_URL, "Share on WhatsApp") + '</div>';
   h += '<section><h2>By topic</h2><div class="card scroll-x"><table><thead><tr><th>Topic</th><th>Score</th><th style="width:30%"></th></tr></thead><tbody>';
   Object.keys(a.mods).sort(function(p, q){ return pct(a.mods[p][0], a.mods[p][1]) - pct(a.mods[q][0], a.mods[q][1]); }).forEach(function(k){
     var v = a.mods[k], p = k.split("|"), m = BY[p[0]] ? BY[p[0]].modules[+p[1]] : null, pc = pct(v[0], v[1]);
@@ -856,6 +866,7 @@ function bind(){
 
   if (view.name === "home" && ME.guest){
     bindGuest(document);
+    $all("[data-pick]").forEach(function(b){ b.onclick = function(){ $("#gQ").value = b.dataset.pick; guestFill(); var o = $("#gOut"); if (o) o.scrollIntoView({ block: "nearest", behavior: "smooth" }); }; });
     var gt = null, gq = $("#gQ");
     gq.oninput = function(){ clearTimeout(gt); gt = setTimeout(guestFill, 120); };
     loadLib(function(){ loadQB(function(){
