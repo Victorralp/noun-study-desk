@@ -25,6 +25,7 @@ var PROFILES = {
     PHY108: ["2026-11-26", "11:00"], PHY107: ["2026-12-01", "11:00"], GST201: ["2026-12-05", "08:30"],
     MTH102: ["2026-12-05", "08:30"], GST102: ["2026-12-09", "08:30"]
   } },
+  guest: { name: "Everyone (no profile)", guest: true, courses: [], clash: "", timetable: {} },
   marley: { name: "Marley", courses: ["CIT237", "CIT215", "CIT211", "CIT217", "CIT191", "GST203", "GST201", "MTH281", "PHY102"], clash: "", timetable: {
     CIT237: ["2026-11-18", "11:00"], CIT215: ["2026-11-21", "08:30"], CIT211: ["2026-11-24", "14:00"],
     CIT217: ["2026-11-25", "08:30"], CIT191: ["2026-11-26", "08:30"], GST203: ["2026-11-30", "08:30"],
@@ -37,7 +38,8 @@ try {
   if (PROFILES[who]){ localStorage.setItem(WHO_KEY, who); history.replaceState(null, "", location.pathname + location.hash); }
   else who = localStorage.getItem(WHO_KEY);
 } catch(e){}
-if (!PROFILES[who]) who = "victor";
+// New visitors get the simple "everyone" home. Old visitors who already have Victor's saved progress keep it.
+if (!PROFILES[who]){ var old = null; try { old = localStorage.getItem(KEY); } catch(e){} who = old ? "victor" : "guest"; }
 var ME = PROFILES[who], SKEY = KEY + (who === "victor" ? "" : "-" + who);
 var COURSES = ME.courses ? ME.courses.map(function(k){ return BY[k]; }) : ALL.filter(function(c){ return !c.stub; });
 var PQ = window.PQ || {};
@@ -53,7 +55,7 @@ var CBT_CODES = COURSES.filter(function(c){ return c.code !== "IFT299" && !c.stu
 /* ---------- storage (per-browser, per-profile, guarded) ---------- */
 function load(){ try { return JSON.parse(localStorage.getItem(SKEY)) || null; } catch(e){ return null; } }
 function save(){ try { localStorage.setItem(SKEY, JSON.stringify(S)); } catch(e){} }
-var S = Object.assign({ attempts: [], known: {}, dates: {}, theme: null }, load() || {});
+var S = Object.assign({ attempts: [], known: {}, dates: {}, theme: null, mine: [] }, load() || {});
 var TIMETABLE = ME.timetable;
 Object.keys(TIMETABLE).forEach(function(k){ if (!S.dates[k] || !S.dates[k].date) S.dates[k] = { date: TIMETABLE[k][0], time: TIMETABLE[k][1] }; });
 var GUIDES = window.GUIDES || {};
@@ -197,7 +199,8 @@ function renderChip(){
 }
 
 /* ---------- render ---------- */
-var TITLES = { home: "Dashboard", exam: "Exam in progress", result: "Results", library: "All NOUN courses", read: "Read course material" };
+var TITLES = { home: "Home", exam: "Exam in progress", result: "Results", library: "All NOUN courses", read: "Read course material" };
+if (ME.guest){ var ttl = document.querySelector('#nav [data-nav="timetable"]'); if (ttl) ttl.style.display = "none"; }
 function render(push){
   renderChip();
   syncHash(push);
@@ -216,13 +219,69 @@ function render(push){
 }
 
 /* ===== HOME ===== */
+function whoHTML(){
+  return '<div class="who"><label for="whoSel">' + (ME.guest ? "Study group profile" : "Studying as") + '</label><select id="whoSel">' + Object.keys(PROFILES).map(function(k){ return '<option value="' + k + '"' + (k === who ? " selected" : "") + '>' + esc(PROFILES[k].name) + '</option>'; }).join("") + '</select></div>';
+}
+/* ===== HOME for everyone (no profile): find your course, take a test, save it ===== */
+var guestReady = false;
+function isMine(code){ return S.mine.some(function(m){ return m[0] === code; }); }
+function guestHTML(){
+  var h = '<div class="card welcome"><h1>Practise for your NOUN exam</h1><p>Free. No sign-up. Works for every NOUN course.</p>';
+  h += '<ol class="steps"><li><b>Type your course code</b> in the box below, for example <span class="mono">GST101</span>.</li><li>Tap <b>Start test</b>. You get 20 questions, like the real e-exam.</li><li>At the end you see your score and the <b>right answer</b> to every question.</li></ol>';
+  h += '<label class="f big-search"><span>Your course code</span><input type="search" id="gQ" autocomplete="off" autocapitalize="characters" enterkeyhint="search" placeholder="e.g. GST101 or accounting"></label>';
+  h += '<div id="gOut"></div></div>';
+  if (S.mine.length){
+    h += '<section><h2>My courses</h2><div class="grid g-courses">';
+    S.mine.forEach(function(m){ h += guestCard(m[0], m[1], true); });
+    h += '</div></section>';
+  } else h += '<p class="muted tip">Tip: tap <b>☆ Save</b> on a course and it stays on this page next time you visit.</p>';
+  if (S.attempts.length) h += '<section><h2>My recent tests</h2>' + historyHTML(S.attempts.slice(-8).reverse()) + '</section>';
+  h += '<section><details class="card small"><summary><b>Questions people ask</b></summary><p class="muted"><b>Do I need to log in?</b> No. Nothing you type leaves your phone. Your scores are kept on this phone only.</p><p class="muted"><b>Where do the questions come from?</b> From the official NOUN course material for each course. Always check with your own course material.</p><p class="muted"><b>Can I use it without data?</b> After your first visit, pages you opened also work offline.</p><p class="muted" style="margin-bottom:0"><b>Is this NOUN\'s website?</b> No. It is a free, unofficial study site made by students.</p></details></section>';
+  h += whoHTML();
+  return h;
+}
+function guestCard(code, title, mine){
+  var b = bestScore(code), t = hasTest(code);
+  var h = '<div class="card course"><div class="row" style="justify-content:space-between"><span class="code">' + esc(code) + '</span><button class="btn small ghost" data-save="' + esc(code) + '" data-title="' + esc(title) + '">' + (isMine(code) ? "★ Saved" : "☆ Save") + '</button></div>';
+  h += '<div class="title">' + esc(title || code) + '</div>';
+  if (mine && t) h += '<div style="font-size:13px" class="muted">Best score: ' + (b === null ? "no test yet" : b + "%") + '</div><div class="bar"><i style="width:' + (b || 0) + '%"></i></div>';
+  h += '<div class="foot">';
+  if (t) h += '<button class="btn primary" data-test="' + esc(code) + '">Start test</button>';
+  else h += '<span class="tag">No test for this course yet</span>';
+  if (window.LIB && libHasCw(code)) h += '<button class="btn" data-read="' + esc(code) + '">Read course material</button>';
+  return h + '</div></div>';
+}
+function libHasCw(code){ var r = libFind(code); return !!(r && r[2].length); }
+function libFind(code){ var L = window.LIB; if (!L) return null; if (!L.by){ L.by = {}; L.c.forEach(function(r){ L.by[r[0]] = r; }); } return L.by[code] || null; }
+function guestFill(){
+  var out = $("#gOut"), inp = $("#gQ"); if (!out || !inp) return;
+  var q = norm(inp.value), qc = q.toUpperCase().replace(/\s+/g, "");
+  if (!q){ out.innerHTML = ""; return; }
+  if (!window.LIB || !QB){ out.innerHTML = '<p class="muted">Loading the course list…</p>'; return; }
+  var list = window.LIB.c.filter(function(r){ return r[0].indexOf(qc) >= 0 || r[1].toLowerCase().indexOf(q) >= 0; });
+  list.sort(function(a, b){ return (b[0] === qc) - (a[0] === qc) || (b[0].indexOf(qc) === 0) - (a[0].indexOf(qc) === 0) || hasTest(b[0]) - hasTest(a[0]); });
+  if (!list.length){ out.innerHTML = '<p class="muted">No course matches "' + esc(inp.value) + '". Check the code on your course form, for example GST101.</p>'; return; }
+  var more = list.length - 6;
+  out.innerHTML = '<div class="grid g-courses" style="margin-top:12px">' + list.slice(0, 6).map(function(r){ return guestCard(r[0], r[1], false); }).join("") + '</div>' + (more > 0 ? '<p class="muted" style="font-size:14px">' + more + ' more match' + (more === 1 ? "es" : "") + '. Type more of the code to narrow it down.</p>' : "");
+  bindGuest(out);
+}
+function bindGuest(root){
+  bindReadTest(root);
+  Array.prototype.forEach.call(root.querySelectorAll("[data-save]"), function(b){ b.onclick = function(){
+    var code = b.dataset.save;
+    if (isMine(code)){ S.mine = S.mine.filter(function(m){ return m[0] !== code; }); toast(code + " removed from My courses"); }
+    else { S.mine.push([code, b.dataset.title || code]); toast(code + " saved to My courses"); }
+    save(); var q = $("#gQ") ? $("#gQ").value : ""; render(); if (q){ $("#gQ").value = q; guestFill(); }
+  }; });
+}
 function homeHTML(){
+  if (ME.guest) return guestHTML();
   var att = S.attempts, avg = att.length ? Math.round(att.reduce(function(s, a){ return s + a.pct; }, 0) / att.length) : null;
   var totalCards = 0, knownCards = 0;
   COURSES.forEach(function(c){ totalCards += c.cards.length; knownCards += knownList(c.code).length; });
   var n = nextExam(), now = Date.now();
 
-  var h = '<div class="who"><label for="whoSel">Studying as</label><select id="whoSel">' + Object.keys(PROFILES).map(function(k){ return '<option value="' + k + '"' + (k === who ? " selected" : "") + '>' + esc(PROFILES[k].name) + '</option>'; }).join("") + '</select></div>';
+  var h = whoHTML();
   h += '<div class="hero">';
   h += '<div class="card next"><div class="eyebrow">Next paper</div>';
   if (n){
@@ -337,7 +396,7 @@ function historyHTML(list){
 /* ===== COURSE ===== */
 function courseHTML(){
   var c = STUB[view.code] || BY[view.code], tab = view.tab || defaultTab(c.code);
-  var h = '<button class="btn small" id="backHome">← Dashboard</button>';
+  var h = '<button class="btn small" id="backHome">← Home</button>';
   if (c.stub){
     h += '<div style="margin-top:14px"><div class="row"><span class="mono" style="color:var(--accent);font-weight:600">' + c.code + '</span><span class="tag">' + c.units + ' unit' + (c.units === 1 ? "" : "s") + '</span></div><h1 style="margin-top:6px">' + esc(c.title) + '</h1></div>';
     return h + '<div class="notice" style="margin:14px 0">No study pack for ' + c.code + ' yet. Use the course material below: read it, then take the test built from it.</div>' + materialHTML(c.code);
@@ -608,7 +667,7 @@ function finishExam(timeUp){
 function resultHTML(){
   if (!X || !X.attempt) return '<div class="card empty">No result to show.</div>';
   var a = X.attempt, g = grade(a.pct);
-  var h = '<button class="btn small" id="backHome">← Dashboard</button>';
+  var h = '<button class="btn small" id="backHome">← Home</button>';
   if (X.timeUp) h += '<div class="notice" style="margin-top:14px">Time up. Your test was submitted automatically.</div>';
   h += '<div class="card" style="margin-top:14px"><div class="score-ring"><div class="grade ' + (g === "F" ? "f" : "") + '">' + g + '</div><div><div class="big">' + a.pct + '%</div><div class="muted">' + a.correct + ' of ' + a.total + ' correct · ' + Math.floor(a.used / 60) + 'm ' + (a.used % 60) + 's used</div></div><span class="spacer"></span><div class="row"><button class="btn" id="retry">Retake</button>' + (X.codes.length === 1 ? reviseBtn(X.codes[0], null, "btn primary", "Revise " + X.codes[0]) : "") + '</div></div></div>';
 
@@ -648,7 +707,7 @@ function loadLib(done){
 }
 function libPrefix(code){ var m = /^[A-Z]+/.exec(code); return m ? m[0] : code; }
 function libraryHTML(){
-  var h = '<button class="btn small" id="backHome">← Dashboard</button>';
+  var h = '<button class="btn small" id="backHome">← Home</button>';
   h += '<div style="margin-top:14px"><h1>All NOUN courses</h1><p class="muted" style="margin:6px 0 0">Course material PDFs and past question papers for every course code listed on <a href="https://puredu.net/noun-e-courseware" target="_blank" rel="noopener">puredu.net</a>. Files open on that site.</p></div>';
   h += '<div class="card lib-search"><label class="f" style="flex:1 1 260px">Search course code or title<input type="text" id="libQ" autocomplete="off" placeholder="e.g. GST101, CIT, accounting" value="' + esc(view.q || "") + '"></label>';
   h += '<label class="f">Prefix<select id="libPre"><option value="">All prefixes</option></select></label>';
@@ -795,7 +854,17 @@ function bind(){
     }); });
   }
 
-  if (view.name === "home"){
+  if (view.name === "home" && ME.guest){
+    bindGuest(document);
+    var gt = null, gq = $("#gQ");
+    gq.oninput = function(){ clearTimeout(gt); gt = setTimeout(guestFill, 120); };
+    loadLib(function(){ loadQB(function(){
+      // Saved course cards need the course list and test list, so draw them once more when those arrive.
+      if (!guestReady){ guestReady = true; if (S.mine.length && view.name === "home"){ var keep = $("#gQ").value; render(); $("#gQ").value = keep; } }
+      guestFill();
+    }); });
+  }
+  if (view.name === "home" && !ME.guest){
     $("#mkCount").onchange = function(){ var n = +this.value; $("#mkMin").value = n ? Math.round(n * 0.75) : 60; };
     $("#mkStart").onclick = function(){
       var v = $("#mkCourse").value;

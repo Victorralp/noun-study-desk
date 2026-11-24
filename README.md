@@ -1,6 +1,6 @@
 # NOUN Study Desk
 
-Static study website for NOUN 200L second-semester IT/CS e-exams (CBT practice, past questions, flashcards, course summaries, progress tracking and exam countdown).
+Free study website for every NOUN course: new visitors type a course code, take a test and see the right answers. The 200L IT/CS study-group profiles (Victor, Samuel, Marley) keep their full dashboard (CBT practice, past questions, flashcards, course summaries, progress tracking and exam countdown).
 
 No build step and no backend. Plain HTML, CSS and JavaScript. Progress is stored in each visitor's browser (`localStorage`).
 
@@ -57,6 +57,7 @@ Anything you publish is public. Anyone with the link can see it.
 - **Edit summaries or flashcards:** edit `js/data.js`.
 - **Refresh the course library:** from the `school` folder run `node tools/crawl.mjs e-courseware tools/courseware.json` and `node tools/crawl.mjs past-questions tools/pastq.json` (takes several minutes, ~45k requests), then `python tools/build_lib.py tools site/js/library.js`.
 - **Tests built from course material:** `qb/CODE.json` holds questions pulled from definitions in each course PDF; `qb/index.json` lists which courses have one. To build or refresh them, from the `school` folder run `python tools/gen_qbank.py --workers 10` (needs `pip install pymupdf`; hours for every course; safe to stop and re-run, it skips finished courses). `--only ACC101,BIO101 --force` rebuilds chosen courses. Courses whose PDFs are scanned images get no test and are listed in `qb/skipped.json`.
+- **Clean the generated tests:** `python tools/clean_qbank.py .` (run on freshly generated `qb/` files only, not twice on the same files). It removes TMA/boilerplate questions and broken answers, replaces junk wrong options, and adds "which of these best describes…" questions.
 - **After any change on a live site:** open `sw.js` and bump `CACHE = "study-desk-v1"` to `v2`, `v3`, ... so returning visitors get the new files instead of the cached ones.
 
 ## Notes

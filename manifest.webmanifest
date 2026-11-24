@@ -1,7 +1,7 @@
 {
   "name": "Study Desk (unofficial)",
   "short_name": "Study Desk",
-  "description": "CBT practice, past questions, flashcards and summaries for NOUN 200L IT/CS second semester.",
+  "description": "Free practice tests for every NOUN course. No sign-up.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

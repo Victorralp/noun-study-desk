@@ -302,3 +302,15 @@ body.exam-mode .unofficial{display:none}
 .fb.ok{border-color:var(--good);color:var(--good)}
 .fb.no{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
 .fb-exp{color:var(--ink);margin-top:6px;font-size:14px}
+/* home for everyone (no profile) */
+.welcome{background:linear-gradient(160deg,var(--accent-soft),var(--surface) 70%)}
+.welcome h1{margin:0}
+.welcome>p{margin:6px 0 0;font-size:16px}
+.steps{margin:14px 0 4px;padding-left:22px;font-size:15.5px;line-height:1.5}
+.steps li{margin:6px 0}
+.big-search{margin-top:14px;display:flex;flex-direction:column;gap:6px;font-weight:700}
+.big-search input{font-size:20px;min-height:54px;padding:10px 14px;border:2px solid var(--accent);border-radius:var(--r);background:var(--surface);color:var(--ink);width:100%;box-sizing:border-box}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--accent);font-weight:700}
+.tip{font-size:14px;margin:14px 2px}
+.g-courses .foot .btn:not(.small){flex:1 1 140px;min-height:46px;font-size:15.5px}
+.opt,.rv,.q-text{overflow-wrap:anywhere}
