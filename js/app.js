@@ -227,7 +227,7 @@ var guestReady = false;
 function isMine(code){ return S.mine.some(function(m){ return m[0] === code; }); }
 function guestHTML(){
   var h = '<div class="card welcome"><h1>Practise for your NOUN exam</h1><p>Free. No sign-up. Works for every NOUN course.</p>';
-  h += '<ol class="steps"><li><b>Type your course code</b> in the box below, for example <span class="mono">GST101</span>.</li><li>Tap <b>Start test</b>. You get 20 questions, like the real e-exam.</li><li>At the end you see your score and the <b>right answer</b> to every question.</li></ol>';
+  h += '<ol class="steps"><li><b>Type your course code</b> in the box below, for example <span class="mono">GST101</span>.</li><li>Tap <b>Start test</b>. You get up to 50 questions, timed like the real e-exam.</li><li>At the end you see your score and the <b>right answer</b> to every question.</li></ol>';
   h += '<label class="f big-search"><span>Your course code</span><input type="search" id="gQ" autocomplete="off" autocapitalize="characters" enterkeyhint="search" placeholder="e.g. GST101 or accounting"></label>';
   h += '<div id="gOut"></div></div>';
   if (S.mine.length){
@@ -773,7 +773,7 @@ function loadBank(code, done){
 function takeTest(code, count){
   loadBank(code, function(ok){
     if (!ok) return modal("Test not available", "Could not load the questions for " + esc(code) + ". Check your connection and try again.", [{ label: "OK" }]);
-    var c = BY[code], n = Math.min(count || 20, c.mcq.length + c.fib.length);
+    var c = BY[code], n = Math.min(count || 50, c.mcq.length + c.fib.length);
     startExam([code], n, Math.max(5, Math.round(n * 0.75)), "mix");
   });
 }
