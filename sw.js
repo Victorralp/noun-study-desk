@@ -1,5 +1,5 @@
 // Offline support: cache the site's own files, refresh them in the background.
-var CACHE = "study-desk-v29";
+var CACHE = "study-desk-v30";
 var FILES = ["./", "index.html", "css/styles.css", "js/data.js", "js/past-questions.js", "js/explain.js", "js/summaries.js", "js/official.js", "js/app.js", "js/guides/COS201.js", "js/guides/GST201.js", "js/guides/IFT203.js", "js/guides/IFT205.js", "js/guides/IFT211.js", "js/guides/IFT213.js", "js/guides/INS207.js", "js/guides/PHY108.js", "js/guides/CYB111.js", "js/packs/COS102.js", "js/packs/IFT191.js", "js/packs/PHY107.js", "js/packs/MTH102.js", "js/packs/GST102.js", "js/packs/CIT191.js", "js/packs/CIT237.js", "js/packs/CIT215.js", "js/packs/CIT211.js", "js/packs/CIT217.js", "js/packs/GST203.js", "js/packs/MTH281.js", "js/packs/PHY102.js", "js/packs/CIT104.js", "js/packs/ENG121.js", "js/packs/GST101.js", "js/packs/GST104.js", "js/packs/GST105.js", "js/packs/GST202.js", "js/packs/GST204.js", "js/packs/GST301.js", "js/packs/GST302.js", "js/library.js", "icons/icon.svg", "manifest.webmanifest"];
 
 self.addEventListener("install", function(e){
